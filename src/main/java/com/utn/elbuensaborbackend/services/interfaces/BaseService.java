@@ -1,4 +1,4 @@
-package com.utn.elbuensaborbackend.services;
+package com.utn.elbuensaborbackend.services.interfaces;
 
 import com.utn.elbuensaborbackend.entities.Base;
 import com.utn.elbuensaborbackend.exceptions.BaseException;

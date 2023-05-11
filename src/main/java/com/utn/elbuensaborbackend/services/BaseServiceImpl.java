@@ -3,8 +3,8 @@ package com.utn.elbuensaborbackend.services;
 import com.utn.elbuensaborbackend.entities.Base;
 import com.utn.elbuensaborbackend.exceptions.BaseException;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
+import com.utn.elbuensaborbackend.services.interfaces.BaseService;
 import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
