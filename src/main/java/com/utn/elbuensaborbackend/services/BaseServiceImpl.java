@@ -10,32 +10,27 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class BaseServiceImpl<E extends Base, I extends Serializable> implements BaseService<E, I> {
+public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> implements BaseService<E, ID> {
 
-    protected BaseRepository<E, I> baseRepository;
+    protected BaseRepository<E, ID> baseRepository;
 
-    public BaseServiceImpl(BaseRepository<E, I> baseRepository) {
+    public BaseServiceImpl(BaseRepository<E, ID> baseRepository) {
         this.baseRepository = baseRepository;
     }
 
     @Override
-    @Transactional
     public List<E> findAll() throws BaseException {
         try {
-           List<E> entities = baseRepository.findAll();
-           return entities;
+            return baseRepository.findAll();
         } catch (Exception e) {
             throw new BaseException(e.getMessage());
         }
     }
 
     @Override
-    @Transactional
-    public E findById(I id) throws BaseException {
+    public E findById(ID id) throws BaseException {
         try {
-            Optional<E> entity = baseRepository.findById(id);
-            return entity.get();
+            return baseRepository.findById(id).get();
         } catch (Exception e) {
             throw new BaseException(e.getMessage());
         }
@@ -53,15 +48,13 @@ public class BaseServiceImpl<E extends Base, I extends Serializable> implements 
 
     @Override
     @Transactional
-    public E update(I id, E entity) throws BaseException {
+    public E update(ID id, E entity) throws BaseException {
         try {
             Optional<E> optional = baseRepository.findById(id);
 
-            if (!optional.isPresent()) {
-                throw new BaseException("No se encontro la entidad.");
-            }
-
-            return baseRepository.save(entity);
+            E entityUpdate = optional.get();
+            entityUpdate = baseRepository.save(entity);
+            return entityUpdate;
         } catch (Exception e) {
             throw new BaseException(e.getMessage());
         }
@@ -69,14 +62,13 @@ public class BaseServiceImpl<E extends Base, I extends Serializable> implements 
 
     @Override
     @Transactional
-    public boolean delete(I id) throws BaseException {
+    public void delete(ID id) throws BaseException {
         try {
             if (!baseRepository.existsById(id)) {
-                throw new BaseException("No se encontro la entidad.");
+                throw new BaseException("No se encontró la entidad");
             }
 
             baseRepository.deleteById(id);
-            return true;
         } catch (Exception e) {
             throw new BaseException(e.getMessage());
         }
