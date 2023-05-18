@@ -1,7 +1,6 @@
 package com.utn.elbuensaborbackend.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +10,7 @@ import lombok.Setter;
 @Table(name = "imagen")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_imagen"))
-public class Cliente extends Base {
+public class Imagen extends Base {
 
     @Column(name = "nombre")
 	private String nombre;

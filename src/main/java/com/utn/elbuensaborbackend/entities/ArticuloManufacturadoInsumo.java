@@ -1,11 +1,12 @@
 package com.utn.elbuensaborbackend.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "articulo_manufacturado_insumo")
@@ -17,6 +18,6 @@ public class ArticuloManufacturadoInsumo extends Base {
 	private int cantidad;
 
     @OneToMany(mappedBy = "articuloManufacturadoInsumo")
-    private Receta receta;
+    private List<Receta> receta;
 
 }
