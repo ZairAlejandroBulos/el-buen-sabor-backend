@@ -13,7 +13,7 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class RubroArticulo extends Base {
 
-    @Column(name = "denominacion", nullable = false)
+    @Column(name = "denominacion", nullable = false, length = 20)
     private String denominacion;
 
     @ManyToOne
@@ -22,4 +22,7 @@ public class RubroArticulo extends Base {
 
     @OneToMany(mappedBy = "rubroPadre")
     private List<RubroArticulo> subRubros;
+
+    @OneToMany(mappedBy = "rubroArticulo")
+    private List<ArticuloInsumo> articulosInsumo;
 }
