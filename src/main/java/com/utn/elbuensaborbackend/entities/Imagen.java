@@ -17,6 +17,5 @@ public class Imagen extends Base {
 
     @ManyToOne
     @JoinColumn(name = "articulo_manufacturado_id")
-	private ArticuloManufacturado articulo_manufacturado_id;
-
+	private ArticuloManufacturado articuloManufacturado;
 }

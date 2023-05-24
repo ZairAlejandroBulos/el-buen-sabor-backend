@@ -12,11 +12,7 @@ import lombok.Setter;
 @AttributeOverride(name = "id", column = @Column(name = "id_receta"))
 public class Receta extends Base {
 
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", columnDefinition = "TEXT")
 	private String descripcion;
-
-    @ManyToOne
-    @JoinColumn(name="articulo_manufacturado_insumo_id")
-	private ArticuloManufacturadoInsumo articuloManufacturadoInsumo;
 
 }

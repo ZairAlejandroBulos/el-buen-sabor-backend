@@ -17,7 +17,12 @@ public class ArticuloManufacturadoInsumo extends Base {
     @Column(name = "cantidad")
 	private int cantidad;
 
-    @OneToMany(mappedBy = "articuloManufacturadoInsumo")
-    private List<Receta> receta;
+    @ManyToOne
+    @JoinColumn(name = "articulo_manufacturado_id")
+    private ArticuloManufacturado articuloManufacturado;
+
+    @ManyToOne
+    @JoinColumn(name = "articulo_insumo_id")
+    private ArticuloInsumo articuloInsumo;
 
 }

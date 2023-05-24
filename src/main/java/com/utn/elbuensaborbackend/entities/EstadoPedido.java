@@ -11,10 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name = "estado_pedido")
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@AttributeOverride(name = "id", column = @Column(name = "id_estado_pedido"))
+@Setter @NoArgsConstructor @AllArgsConstructor @AttributeOverride(name = "id", column = @Column(name = "id_estado_pedido"))
 public class EstadoPedido extends Base{
 
     @Column(name = "denominacion", length = 20)
@@ -27,6 +24,5 @@ public class EstadoPedido extends Base{
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
-
 
 }

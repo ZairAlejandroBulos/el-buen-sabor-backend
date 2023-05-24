@@ -15,31 +15,27 @@ import java.util.List;
 @AttributeOverride(name = "id", column = @Column(name = "id_articulo_manufacturado"))
 public class ArticuloManufacturado extends Base {
 
-    @Column(name = "denominacion", length=20)
+    @Column(name = "denominacion", length = 20)
 	private String denominacion;
-    
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
     @Column(name = "tiempo_estimado_cocina")
     @Temporal(TemporalType.TIME)
 	private Date tiempoEstimado;
 
     @ManyToOne
-    @JoinColumn(name = "rubro_general_id")
-	private RubroGeneral rubroGeneral;
+    @JoinColumn(name = "rubro_id")
+	private Rubro rubro;
 
     @OneToMany(mappedBy = "articuloManufacturado")
     private List<Imagen> imagenes;
 
-    @ManyToMany(
-        fetch = FetchType.LAZY,
-        targetEntity = ArticuloInsumo.class,
-        cascade = {CascadeType.PERSIST, CascadeType.MERGE}
-    )
-    @JoinTable(
-        name = "articulo_manufacturado_insumo",
-        joinColumns = @JoinColumn(name = "articulo_manufacturado_id"),
-        inverseJoinColumns = @JoinColumn(name = "articulo_insumo_id")
-    )
-    private List<ArticuloInsumo> articulosInsumos;
+    @OneToMany(mappedBy = "articuloManufacturado")
+    private List<ArticuloManufacturadoPrecioVenta> preciosVentas;
 
+    @OneToMany(mappedBy = "articuloManufacturado")
+    private List<ArticuloManufacturadoInsumo> articulosManufacturadosInsumos;
 
 }

@@ -10,10 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "unidad_medida")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_unidad_medida"))
 public class UnidadMedida extends Base{
 
@@ -22,6 +19,4 @@ public class UnidadMedida extends Base{
 
     @OneToMany(mappedBy = "unidadMedida")
     private List<ArticuloInsumo> articulosInsumo;
-
-
 }

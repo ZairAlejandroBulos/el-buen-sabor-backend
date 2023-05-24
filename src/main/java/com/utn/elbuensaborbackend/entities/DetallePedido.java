@@ -16,11 +16,17 @@ public class DetallePedido extends Base {
     private int cantidad;
 
     @Column(name = "subtotal")
-    private double subTotal;
+    private double subtotal;
 
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 
+    @ManyToOne
+    @JoinColumn(name = "articulo_manufacturado_id")
+    private ArticuloManufacturado articuloManufacturado;
 
+    @ManyToOne
+    @JoinColumn(name = "articulo_insumo_id")
+    private ArticuloInsumo articuloInsumo;
 }

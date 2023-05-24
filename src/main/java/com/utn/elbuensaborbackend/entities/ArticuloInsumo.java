@@ -25,8 +25,8 @@ public class ArticuloInsumo extends Base {
     private UnidadMedida unidadMedida;
 
     @ManyToOne
-    @JoinColumn(name = "rubro_articulo_id")
-    private RubroArticulo rubroArticulo;
+    @JoinColumn(name = "rubro_id")
+    private Rubro rubro;
 
     @OneToMany(mappedBy = "articuloInsumo")
     private List<ArticuloInsumoStockActual> articuloInsumoStockActual;
@@ -37,10 +37,6 @@ public class ArticuloInsumo extends Base {
     @OneToMany(mappedBy = "articuloInsumo")
     private List<ArticuloInsumoPrecioCompra> articuloInsumoPrecioCompra;
 
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            targetEntity = ArticuloManufacturado.class,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
-    )
-    private List<ArticuloManufacturado> articuloManufacturados;
+    @OneToMany(mappedBy = "articuloInsumo")
+    private List<ArticuloManufacturadoInsumo> articulosManufacturadosInsumos;
 }

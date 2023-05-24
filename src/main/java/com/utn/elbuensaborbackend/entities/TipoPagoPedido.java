@@ -10,10 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tipo_pago_pedido")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_tipo_pago_pedido"))
 public class TipoPagoPedido extends Base{
 
@@ -22,5 +19,4 @@ public class TipoPagoPedido extends Base{
 
     @OneToMany(mappedBy = "tipoPagoPedido")
     private List<Pedido> pedidos;
-
 }

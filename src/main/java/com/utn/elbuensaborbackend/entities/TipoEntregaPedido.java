@@ -10,10 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tipo_entrega_pedido")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_tipo_entrega_pedido"))
 public class TipoEntregaPedido extends Base{
 
