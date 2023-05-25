@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface RubroRepository extends BaseRepository<Rubro, Long> {
-    @Query(value = "SELECT r FROM Rubro r WHERE r.rubroPadre.id IS NULL")
+    @Query(value = "SELECT * FROM Rubro WHERE rubro_id IS NULL", nativeQuery = true)
     List<Rubro> findAllParents();
-
 }
