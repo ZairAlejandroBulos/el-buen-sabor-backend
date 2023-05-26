@@ -6,13 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class DomicilioDTO {
+public class ImagenDTO {
 
     private Long id;
-
-    private String calle;
-
-    private Integer numero;
-
-    private LocalidadDTO localidad;
+    private String nombre;
+    private ArticuloManufacturadoDTO articuloManufacturado;
 }

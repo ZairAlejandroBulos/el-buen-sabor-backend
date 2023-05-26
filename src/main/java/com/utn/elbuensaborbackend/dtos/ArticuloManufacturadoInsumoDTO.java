@@ -1,18 +1,17 @@
 package com.utn.elbuensaborbackend.dtos;
 
+import com.utn.elbuensaborbackend.entities.ArticuloManufacturado;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class DomicilioDTO {
+public class ArticuloManufacturadoInsumoDTO {
 
     private Long id;
 
-    private String calle;
+    private Integer cantidad;
 
-    private Integer numero;
-
-    private LocalidadDTO localidad;
+    private ArticuloManufacturadoDTO articuloManufacturado;
 }

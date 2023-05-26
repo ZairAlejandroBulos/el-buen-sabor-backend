@@ -6,13 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class DomicilioDTO {
+public class ArticuloInsumoDTO {
 
     private Long id;
 
-    private String calle;
+    private String denominacion;
 
-    private Integer numero;
+    private Boolean esInsumo;
 
-    private LocalidadDTO localidad;
+    private UnidadMedidaDTO unidadMedida;
+
+    private RubroDTO rubro;
+
 }

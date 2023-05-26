@@ -8,9 +8,15 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class ClienteDTO {
 
+    private Long id;
+
     private String nombre;
+
     private String apellido;
+
     private Long telefono;
+
     private UsuarioDTO usuario;
+
     private DomicilioDTO domicilio;
 }

@@ -7,5 +7,8 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class RolDTO {
+
+    private Long id;
+
     private String denominacion;
 }

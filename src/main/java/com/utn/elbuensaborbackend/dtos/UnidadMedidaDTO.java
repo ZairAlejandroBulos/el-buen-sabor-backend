@@ -1,2 +1,14 @@
-package com.utn.elbuensaborbackend.dtos;public class UnidadMedidaDTO {
+package com.utn.elbuensaborbackend.dtos;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+public class UnidadMedidaDTO {
+
+    private Long id;
+
+    private String denominacion;
 }

@@ -5,14 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class DomicilioDTO {
+public class ArticuloInsumoPrecioCompraDTO {
 
     private Long id;
 
-    private String calle;
+    private Date fecha;
 
-    private Integer numero;
+    private Double monto;
 
-    private LocalidadDTO localidad;
+    private ArticuloInsumoDTO articuloInsumo;
 }
