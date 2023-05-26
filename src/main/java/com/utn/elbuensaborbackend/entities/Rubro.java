@@ -28,13 +28,4 @@ public class Rubro extends Base  {
     @OneToMany(mappedBy = "rubroPadre", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Rubro> subRubros;
-
-    @OneToMany(mappedBy = "rubro")
-    @JsonIgnore
-    private List<ArticuloInsumo> articulosInsumo;
-
-    @OneToMany(mappedBy = "rubro")
-    @JsonIgnore
-    private List<ArticuloManufacturado> articuloManufacturados;
-
 }

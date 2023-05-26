@@ -24,10 +24,11 @@ public class Pedido extends Base {
     private Date horaEstimadaFin;
 
     @Column(name = "monto_descuento")
-    private double montoDescuento;
+    private Double montoDescuento;
 
-    @OneToMany(mappedBy = "pedido")
-    private List<EstadoPedido> estadoPedidos;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "tipo_entrega_pedido_id")
@@ -36,7 +37,4 @@ public class Pedido extends Base {
     @ManyToOne
     @JoinColumn(name = "tipo_pago_pedido_id")
     private TipoPagoPedido tipoPagoPedido;
-
-    @OneToMany(mappedBy = "pedido")
-    private List<DetallePedido> detallePedido;
 }

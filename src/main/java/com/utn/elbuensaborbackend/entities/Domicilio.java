@@ -23,7 +23,4 @@ public class Domicilio extends Base {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "localidad_id")
     private Localidad localidad;
-
-    @OneToMany(mappedBy = "domicilio",fetch = FetchType.LAZY)
-    private List<Cliente> clientes;
 }

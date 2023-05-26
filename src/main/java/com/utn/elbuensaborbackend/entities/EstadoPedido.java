@@ -24,5 +24,4 @@ public class EstadoPedido extends Base{
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
-
 }

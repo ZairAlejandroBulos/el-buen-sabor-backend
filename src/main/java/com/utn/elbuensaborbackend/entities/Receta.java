@@ -14,5 +14,4 @@ public class Receta extends Base {
 
     @Column(name = "descripcion", columnDefinition = "TEXT")
 	private String descripcion;
-
 }

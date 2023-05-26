@@ -21,7 +21,7 @@ public class ArticuloInsumoPrecioCompra extends Base{
     private Date fecha;
 
     @Column(name = "monto")
-    private double monto;
+    private Double monto;
 
     @ManyToOne
     @JoinColumn(name = "articulo_insumo_id")

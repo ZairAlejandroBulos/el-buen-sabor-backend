@@ -18,7 +18,7 @@ import java.util.Date;
 public class ArticuloInsumoStockActual extends Base{
 
     @Column(name = "stock_actual")
-    private float stockActual;
+    private Float stockActual;
 
     @Column(name = "fecha")
     private Date fecha;

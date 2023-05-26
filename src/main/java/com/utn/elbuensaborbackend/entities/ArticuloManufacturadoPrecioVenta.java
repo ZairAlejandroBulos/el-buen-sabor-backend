@@ -16,9 +16,11 @@ public class ArticuloManufacturadoPrecioVenta extends Base {
 
     @Column(name = "precio_venta")
     private Double precioVenta;
+
     @Column(name = "fecha")
     @Temporal(value = TemporalType.DATE)
     private Date fecha;
+
     @ManyToOne
     @JoinColumn(name = "articulo_manufacturado_id")
     private ArticuloManufacturado articuloManufacturado;

@@ -17,8 +17,8 @@ import java.util.Date;
 @AttributeOverride(name = "id", column = @Column(name = "id_articulo_insumo_stock_minimo"))
 public class ArticuloInsumoStockMinimo extends Base{
 
-    @Column(name = "stock_actual")
-    private float stockActual;
+    @Column(name = "stock_minimo")
+    private Float stockMinimo;
 
     @Column(name = "fecha")
     private Date fecha;

@@ -13,10 +13,10 @@ import lombok.Setter;
 public class DetallePedido extends Base {
 
     @Column(name = "cantidad")
-    private int cantidad;
+    private Integer cantidad;
 
     @Column(name = "subtotal")
-    private double subtotal;
+    private Double subtotal;
 
     @ManyToOne
     @JoinColumn(name = "pedido_id")

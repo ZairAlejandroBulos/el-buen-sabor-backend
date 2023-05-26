@@ -15,7 +15,7 @@ import java.util.Date;
 public class MercadoPagoDatos extends Base {
 
 	@Column(name = "identificador_pago")
-	private long identificadorPago;
+	private Long identificadorPago;
 
 	@Column(name = "fecha_creacion")
 	@Temporal(TemporalType.TIME)
@@ -36,6 +36,4 @@ public class MercadoPagoDatos extends Base {
 
 	@Column(name = "estado", length=20)
 	private String estado;
-
-
 }

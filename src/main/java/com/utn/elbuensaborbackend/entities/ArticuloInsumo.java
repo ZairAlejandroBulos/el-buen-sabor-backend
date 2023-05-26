@@ -18,7 +18,7 @@ public class ArticuloInsumo extends Base {
     private String denominacion;
 
     @Column(name = "es_insumo", nullable = false)
-    private boolean esInsumo;
+    private Boolean esInsumo;
 
     @ManyToOne
     @JoinColumn(name = "unidad_medida_id")
@@ -27,16 +27,4 @@ public class ArticuloInsumo extends Base {
     @ManyToOne
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;
-
-    @OneToMany(mappedBy = "articuloInsumo")
-    private List<ArticuloInsumoStockActual> articuloInsumoStockActual;
-
-    @OneToMany(mappedBy = "articuloInsumo")
-    private List<ArticuloInsumoStockMinimo> articuloInsumoStockMinimo;
-
-    @OneToMany(mappedBy = "articuloInsumo")
-    private List<ArticuloInsumoPrecioCompra> articuloInsumoPrecioCompra;
-
-    @OneToMany(mappedBy = "articuloInsumo")
-    private List<ArticuloManufacturadoInsumo> articulosManufacturadosInsumos;
 }

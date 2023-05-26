@@ -16,7 +16,4 @@ public class UnidadMedida extends Base{
 
     @Column(name = "denominacion", length = 20, nullable = false)
     private String denominacion;
-
-    @OneToMany(mappedBy = "unidadMedida")
-    private List<ArticuloInsumo> articulosInsumo;
 }

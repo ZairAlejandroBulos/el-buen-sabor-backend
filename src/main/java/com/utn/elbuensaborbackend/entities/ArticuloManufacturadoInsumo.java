@@ -15,7 +15,7 @@ import java.util.List;
 public class ArticuloManufacturadoInsumo extends Base {
 
     @Column(name = "cantidad")
-	private int cantidad;
+	private Integer cantidad;
 
     @ManyToOne
     @JoinColumn(name = "articulo_manufacturado_id")
@@ -24,5 +24,4 @@ public class ArticuloManufacturadoInsumo extends Base {
     @ManyToOne
     @JoinColumn(name = "articulo_insumo_id")
     private ArticuloInsumo articuloInsumo;
-
 }

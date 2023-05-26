@@ -28,14 +28,4 @@ public class ArticuloManufacturado extends Base {
     @ManyToOne
     @JoinColumn(name = "rubro_id")
 	private Rubro rubro;
-
-    @OneToMany(mappedBy = "articuloManufacturado")
-    private List<Imagen> imagenes;
-
-    @OneToMany(mappedBy = "articuloManufacturado")
-    private List<ArticuloManufacturadoPrecioVenta> preciosVentas;
-
-    @OneToMany(mappedBy = "articuloManufacturado")
-    private List<ArticuloManufacturadoInsumo> articulosManufacturadosInsumos;
-
 }

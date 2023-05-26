@@ -16,7 +16,4 @@ public class TipoEntregaPedido extends Base{
 
     @Column(name = "descripcion", length = 50)
     private String descripcion;
-
-    @OneToMany(mappedBy = "tipoEntregaPedido")
-    private List<Pedido> pedidos;
 }
