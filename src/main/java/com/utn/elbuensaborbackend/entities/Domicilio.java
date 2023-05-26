@@ -20,10 +20,10 @@ public class Domicilio extends Base {
     @Column(name = "numero")
     private Integer numero;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "localidad_id")
     private Localidad localidad;
 
-    @OneToMany(mappedBy = "domicilio")
+    @OneToMany(mappedBy = "domicilio",fetch = FetchType.LAZY)
     private List<Cliente> clientes;
 }

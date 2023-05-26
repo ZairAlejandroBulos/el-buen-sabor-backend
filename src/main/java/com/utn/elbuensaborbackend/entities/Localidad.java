@@ -16,8 +16,4 @@ public class Localidad extends Base {
 
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
-
-    @OneToMany(mappedBy = "localidad")
-    private List<Domicilio> domicilios;
-
 }

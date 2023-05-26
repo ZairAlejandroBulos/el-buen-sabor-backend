@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,4 +25,8 @@ public class Cliente extends Base {
     @ManyToOne
     @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 }

@@ -18,7 +18,7 @@ public class Usuario extends Base {
     @Column(name = "clave", nullable = false, length = 30)
     private String clave;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rol_id")
     private Rol rol;
 }
