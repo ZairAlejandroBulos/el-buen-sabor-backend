@@ -19,6 +19,7 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
         super(baseRepository);
     }
 
+
     @Override
     public List<Rubro> findAllParents() throws Exception {
         try {

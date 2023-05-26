@@ -20,12 +20,20 @@ public class Rubro extends Base  {
     @Column(name = "denominacion", nullable = false, length = 20)
     private String denominacion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rubro_id")
-    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "rubro_padre_id")
     private Rubro rubroPadre;
 
-    @OneToMany(mappedBy = "rubroPadre", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "rubroPadre")
     private List<Rubro> subRubros;
+
+    public Rubro(String denominacion, Rubro rubroPadre) {
+        this.denominacion = denominacion;
+        this.rubroPadre = rubroPadre;
+    }
+
+    public void setSubRubros(List<Rubro> subRubros) {
+        this.subRubros.clear();
+        this.subRubros.addAll(subRubros);
+    }
 }

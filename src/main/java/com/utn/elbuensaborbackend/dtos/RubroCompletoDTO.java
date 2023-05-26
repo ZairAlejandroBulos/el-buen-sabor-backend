@@ -6,12 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class RubroDTO {
+public class RubroCompletoDTO {
     private Long id;
-    private String denominacion;
+    private RubroSimpleDTO rubroPadre;
     private Long rubroPadreId;
-    private List<RubroDTO> subRubros;
+    private String denominacion;
 }

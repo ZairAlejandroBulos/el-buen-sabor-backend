@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/rubros")
-public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl> {
+public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl>  {
 
     @GetMapping("/parents")
     public ResponseEntity<?> getAllParents() {
@@ -22,5 +22,4 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl>
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
-
 }
