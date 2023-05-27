@@ -5,4 +5,5 @@ import com.utn.elbuensaborbackend.entities.Cliente;
 import java.util.List;
 
 public interface ClienteService extends BaseService<Cliente, Long> {
+    List<Cliente> findAllClientesByRoleId(Long rolId) throws Exception;
 }

@@ -10,7 +10,8 @@ import java.util.List;
 @Repository
 public interface ClienteRepository extends BaseRepository<Cliente, Long> {
 
-    @Query(value = "SELECT c FROM Cliente c JOIN c.usuario u JOIN u.rol r WHERE r.denominacion IN :roles")
-    List<Cliente> findClientesByRoles(@Param("roles") List<String> roles);
+    @Query("SELECT c FROM Cliente c JOIN FETCH c.usuario u JOIN FETCH u.rol r WHERE r.id <> :rolId")
+    List<Cliente> findAllCustomersWithDifferentRoleId(@Param("rolId") Long rolId);
+
 
 }

@@ -12,6 +12,9 @@ import lombok.Setter;
 @AttributeOverride(name = "id", column = @Column(name = "id_usuario"))
 public class Usuario extends Base {
 
+    @Column(name = "auth0_id")
+    private String auth0Id;
+
     @Column(name = "usuario", nullable = false, length = 100)
     private String usuario;
 

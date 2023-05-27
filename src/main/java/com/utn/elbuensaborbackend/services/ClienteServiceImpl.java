@@ -20,4 +20,13 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implement
         super(baseRepository);
     }
 
+    @Override
+    public List<Cliente> findAllClientesByRoleId(Long rolId) throws Exception {
+        try{
+            return clienteRepository.findAllCustomersWithDifferentRoleId(rolId);
+        }catch(Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
 }
