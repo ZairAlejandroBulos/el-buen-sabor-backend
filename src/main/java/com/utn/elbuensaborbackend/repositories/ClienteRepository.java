@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ClienteRepository extends BaseRepository<Cliente, Long> {
 
-    @Query("SELECT c FROM Cliente c JOIN FETCH c.usuario u JOIN FETCH u.rol r WHERE r.id <> :rolId")
+    @Query(value = "SELECT c.* FROM Cliente c INNER JOIN Usuario u ON c.usuario_id = u.id_usuario INNER JOIN Rol r ON u.rol_id = r.id_rol WHERE r.id_rol = :rolId", nativeQuery = true)
     List<Cliente> findAllCustomersWithDifferentRoleId(@Param("rolId") Long rolId);
 
 

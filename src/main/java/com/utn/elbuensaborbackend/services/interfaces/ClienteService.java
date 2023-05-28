@@ -1,9 +1,10 @@
 package com.utn.elbuensaborbackend.services.interfaces;
 
+import com.utn.elbuensaborbackend.dtos.ClienteDTO;
 import com.utn.elbuensaborbackend.entities.Cliente;
 
 import java.util.List;
 
 public interface ClienteService extends BaseService<Cliente, Long> {
-    List<Cliente> findAllClientesByRoleId(Long rolId) throws Exception;
+    List<ClienteDTO> findAllClientesByRoleId(Long rolId) throws Exception;
 }

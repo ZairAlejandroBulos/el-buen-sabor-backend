@@ -63,7 +63,7 @@ public class Auth0TokenController {
 
                 List<RolDTO> roles = getRolesUsuario(usuarioId);
 
-                UsuarioDTO usuarioDTO = new UsuarioDTO(email, roles);
+                UsuarioDTO usuarioDTO = new UsuarioDTO(email, roles.get(0));
                 usuarios.add(usuarioDTO);
             }
 

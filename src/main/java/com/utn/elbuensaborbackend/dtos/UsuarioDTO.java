@@ -12,5 +12,5 @@ public class UsuarioDTO {
 
     private String usuario;
 
-    private List<RolDTO> roles;
+    private RolDTO rol;
 }
