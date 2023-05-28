@@ -12,11 +12,11 @@ import java.util.List;
 @RequestMapping("/api/v1/clientes")
 public class ClienteController extends BaseControllerImpl<Cliente, ClienteServiceImpl> {
 
-    @GetMapping("/byRol/{rolId}")
-    public ResponseEntity<?> findAllCustomersWithDifferentRoleId(@PathVariable Long rolId) {
+    @GetMapping("/byRoles/{roles}")
+    public ResponseEntity<?> getAllClientesByRoles(@PathVariable List<String> roles) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findAllClientesByRoleId(rolId));
+                    .body(service.findAllClientesByRoles(roles));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("{\"error\": \"Ocurrio un error\"}");

@@ -10,8 +10,11 @@ import java.util.List;
 @Repository
 public interface ClienteRepository extends BaseRepository<Cliente, Long> {
 
-    @Query(value = "SELECT c.* FROM Cliente c INNER JOIN Usuario u ON c.usuario_id = u.id_usuario INNER JOIN Rol r ON u.rol_id = r.id_rol WHERE r.id_rol = :rolId", nativeQuery = true)
-    List<Cliente> findAllCustomersWithDifferentRoleId(@Param("rolId") Long rolId);
+    @Query(value = "SELECT c.* FROM Cliente c " +
+            "INNER JOIN Usuario u ON c.usuario_id = u.id_usuario " +
+            "INNER JOIN Rol r ON u.rol_id = r.id_rol " +
+            "WHERE r.denominacion IN :roles", nativeQuery = true)
+    List<Cliente> findAllClientesByRoles(@Param("roles") List<String> roles);
 
 
 }
