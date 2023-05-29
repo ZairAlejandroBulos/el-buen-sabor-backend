@@ -22,4 +22,38 @@ public class ClienteController extends BaseControllerImpl<Cliente, ClienteServic
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
+
+    @GetMapping("/byNombre/{nombre}")
+    public ResponseEntity<?> getAllClientesByName(@PathVariable String nombre) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(service.findAllClientesByName(nombre));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("{\"error\": \"Ocurrio un error\"}");
+        }
+    }
+
+    @GetMapping("/byApellido/{apellido}")
+    public ResponseEntity<?> getAllClientesByApellido(@PathVariable String apellido) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(service.findAllClientesByApellido(apellido));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("{\"error\": \"Ocurrio un error\"}");
+        }
+    }
+
+    @GetMapping("/byNombreAndApellido/{nombre}/{apellido}")
+    public ResponseEntity<?> getAllClientesByNombreAndApellido(@PathVariable String nombre, @PathVariable String apellido) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(service.findAllClientesByNameAndApellido(nombre, apellido));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("{\"error\": \"Ocurrio un error\"}");
+        }
+    }
+
 }

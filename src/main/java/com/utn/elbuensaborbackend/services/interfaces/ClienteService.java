@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface ClienteService extends BaseService<Cliente, Long> {
     List<ClienteDTO> findAllClientesByRoles(List<String> roles) throws Exception;
+    List<ClienteDTO> findAllClientesByName(String nombre) throws Exception;
+    List<ClienteDTO> findAllClientesByApellido(String apellido) throws Exception;
+    List<ClienteDTO> findAllClientesByNameAndApellido(String nombre, String apellido) throws Exception;
+
 }
