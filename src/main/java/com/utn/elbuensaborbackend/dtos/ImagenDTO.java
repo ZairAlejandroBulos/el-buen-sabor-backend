@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ImagenDTO {
+public class ImagenDTO extends BaseDTO{
 
-    private Long id;
     private String nombre;
-    private ArticuloManufacturadoDTO articuloManufacturado;
 }
