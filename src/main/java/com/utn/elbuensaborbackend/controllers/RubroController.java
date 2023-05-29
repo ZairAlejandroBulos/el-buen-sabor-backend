@@ -2,16 +2,16 @@ package com.utn.elbuensaborbackend.controllers;
 
 import com.utn.elbuensaborbackend.entities.Rubro;
 import com.utn.elbuensaborbackend.services.RubroServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/rubros")
-public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl>  {
+public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl> {
 
+    /*
     @GetMapping("/parents")
     public ResponseEntity<?> getAllParents() {
         try {
@@ -22,4 +22,6 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl>
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
+     */
+
 }

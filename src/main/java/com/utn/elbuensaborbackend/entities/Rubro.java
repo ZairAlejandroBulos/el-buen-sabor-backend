@@ -22,18 +22,10 @@ public class Rubro extends Base  {
 
     @ManyToOne
     @JoinColumn(name = "rubro_padre_id")
+    @JsonBackReference
     private Rubro rubroPadre;
 
     @OneToMany(mappedBy = "rubroPadre")
+    @JsonManagedReference
     private List<Rubro> subRubros;
-
-    public Rubro(String denominacion, Rubro rubroPadre) {
-        this.denominacion = denominacion;
-        this.rubroPadre = rubroPadre;
-    }
-
-    public void setSubRubros(List<Rubro> subRubros) {
-        this.subRubros.clear();
-        this.subRubros.addAll(subRubros);
-    }
 }

@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class RubroSimpleDTO {
-    private Long id;
+public class RubroSimpleDTO extends BaseDTO {
+
     private Long rubroPadreId;
+
     private String denominacion;
 }

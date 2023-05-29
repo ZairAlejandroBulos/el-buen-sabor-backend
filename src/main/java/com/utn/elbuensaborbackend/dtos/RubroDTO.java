@@ -9,9 +9,11 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class RubroDTO {
-    private Long id;
+public class RubroDTO extends BaseDTO {
+
     private String denominacion;
+
     private Long rubroPadreId;
+
     private List<RubroDTO> subRubros;
 }

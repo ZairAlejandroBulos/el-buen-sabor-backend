@@ -6,5 +6,9 @@ import com.utn.elbuensaborbackend.entities.Rubro;
 import java.util.List;
 
 public interface RubroService extends BaseService<Rubro, Long> {
+
+    /*
     List<Rubro> findAllParents() throws Exception;
+     */
+
 }
