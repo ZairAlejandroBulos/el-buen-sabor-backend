@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class RolDTO {
+public class RolDTO extends BaseDTO {
 
     private String denominacion;
 }

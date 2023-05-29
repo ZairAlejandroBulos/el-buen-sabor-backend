@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ClienteDTO {
+public class ClienteDTO extends BaseDTO {
     
     private String nombre;
 

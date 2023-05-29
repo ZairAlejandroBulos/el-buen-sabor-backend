@@ -29,21 +29,26 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implement
 
             for(Cliente c : clientes){
                 ClienteDTO clienteDTO = new ClienteDTO();
+                clienteDTO.setId(c.getId());
                 clienteDTO.setNombre(c.getNombre());
                 clienteDTO.setApellido(c.getApellido());
                 clienteDTO.setTelefono(c.getTelefono());
 
                 RolDTO rolDTO = new RolDTO();
+                rolDTO.setId(c.getUsuario().getRol().getId());
                 rolDTO.setDenominacion(c.getUsuario().getRol().getDenominacion());
 
                 UsuarioDTO usuarioDTO = new UsuarioDTO();
+                usuarioDTO.setId(c.getUsuario().getId());
                 usuarioDTO.setUsuario(c.getUsuario().getUsuario());
                 usuarioDTO.setRol(rolDTO);
 
                 LocalidadDTO localidadDTO = new LocalidadDTO();
-                localidadDTO.setNombre(c.getNombre());
+                localidadDTO.setId(c.getDomicilio().getLocalidad().getId());
+                localidadDTO.setNombre(c.getDomicilio().getLocalidad().getNombre());
 
                 DomicilioDTO domicilioDTO = new DomicilioDTO();
+                domicilioDTO.setId(c.getDomicilio().getId());
                 domicilioDTO.setNumero(c.getDomicilio().getNumero());
                 domicilioDTO.setCalle(c.getDomicilio().getCalle());
                 domicilioDTO.setLocalidad(localidadDTO);
@@ -68,21 +73,26 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implement
 
             for(Cliente c : clientes){
                 ClienteDTO clienteDTO = new ClienteDTO();
+                clienteDTO.setId(c.getId());
                 clienteDTO.setNombre(c.getNombre());
                 clienteDTO.setApellido(c.getApellido());
                 clienteDTO.setTelefono(c.getTelefono());
 
                 RolDTO rolDTO = new RolDTO();
+                rolDTO.setId(c.getUsuario().getRol().getId());
                 rolDTO.setDenominacion(c.getUsuario().getRol().getDenominacion());
 
                 UsuarioDTO usuarioDTO = new UsuarioDTO();
+                usuarioDTO.setId(c.getUsuario().getId());
                 usuarioDTO.setUsuario(c.getUsuario().getUsuario());
                 usuarioDTO.setRol(rolDTO);
 
                 LocalidadDTO localidadDTO = new LocalidadDTO();
-                localidadDTO.setNombre(c.getNombre());
+                localidadDTO.setId(c.getDomicilio().getLocalidad().getId());
+                localidadDTO.setNombre(c.getDomicilio().getLocalidad().getNombre());
 
                 DomicilioDTO domicilioDTO = new DomicilioDTO();
+                domicilioDTO.setId(c.getDomicilio().getId());
                 domicilioDTO.setNumero(c.getDomicilio().getNumero());
                 domicilioDTO.setCalle(c.getDomicilio().getCalle());
                 domicilioDTO.setLocalidad(localidadDTO);
@@ -107,21 +117,26 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implement
 
             for(Cliente c : clientes){
                 ClienteDTO clienteDTO = new ClienteDTO();
+                clienteDTO.setId(c.getId());
                 clienteDTO.setNombre(c.getNombre());
                 clienteDTO.setApellido(c.getApellido());
                 clienteDTO.setTelefono(c.getTelefono());
 
                 RolDTO rolDTO = new RolDTO();
+                rolDTO.setId(c.getUsuario().getRol().getId());
                 rolDTO.setDenominacion(c.getUsuario().getRol().getDenominacion());
 
                 UsuarioDTO usuarioDTO = new UsuarioDTO();
+                usuarioDTO.setId(c.getUsuario().getId());
                 usuarioDTO.setUsuario(c.getUsuario().getUsuario());
                 usuarioDTO.setRol(rolDTO);
 
                 LocalidadDTO localidadDTO = new LocalidadDTO();
-                localidadDTO.setNombre(c.getNombre());
+                localidadDTO.setId(c.getDomicilio().getLocalidad().getId());
+                localidadDTO.setNombre(c.getDomicilio().getLocalidad().getNombre());
 
                 DomicilioDTO domicilioDTO = new DomicilioDTO();
+                domicilioDTO.setId(c.getDomicilio().getId());
                 domicilioDTO.setNumero(c.getDomicilio().getNumero());
                 domicilioDTO.setCalle(c.getDomicilio().getCalle());
                 domicilioDTO.setLocalidad(localidadDTO);
@@ -146,21 +161,26 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implement
 
             for(Cliente c : clientes){
                 ClienteDTO clienteDTO = new ClienteDTO();
+                clienteDTO.setId(c.getId());
                 clienteDTO.setNombre(c.getNombre());
                 clienteDTO.setApellido(c.getApellido());
                 clienteDTO.setTelefono(c.getTelefono());
 
                 RolDTO rolDTO = new RolDTO();
+                rolDTO.setId(c.getUsuario().getRol().getId());
                 rolDTO.setDenominacion(c.getUsuario().getRol().getDenominacion());
 
                 UsuarioDTO usuarioDTO = new UsuarioDTO();
+                usuarioDTO.setId(c.getUsuario().getId());
                 usuarioDTO.setUsuario(c.getUsuario().getUsuario());
                 usuarioDTO.setRol(rolDTO);
 
                 LocalidadDTO localidadDTO = new LocalidadDTO();
-                localidadDTO.setNombre(c.getNombre());
+                localidadDTO.setId(c.getDomicilio().getLocalidad().getId());
+                localidadDTO.setNombre(c.getDomicilio().getLocalidad().getNombre());
 
                 DomicilioDTO domicilioDTO = new DomicilioDTO();
+                domicilioDTO.setId(c.getDomicilio().getId());
                 domicilioDTO.setNumero(c.getDomicilio().getNumero());
                 domicilioDTO.setCalle(c.getDomicilio().getCalle());
                 domicilioDTO.setLocalidad(localidadDTO);
