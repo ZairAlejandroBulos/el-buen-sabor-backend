@@ -24,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/auth0")
 public class Auth0TokenController {
+
     @Value("${AUTH0_DOMAIN}")
     private String domain;
 
@@ -35,9 +36,7 @@ public class Auth0TokenController {
 
     @Value("${AUTH0_AUDIENCE}")
     private String apiAudience;
-
-
-    @GetMapping("/users")
+    @GetMapping("/usuarios")
     public ResponseEntity<List<UsuarioDTO>> getUsuarios(){
         try {
             String token = getTokenApi();
@@ -100,7 +99,7 @@ public class Auth0TokenController {
             RolDTO[] rolesUsuarios = mapper.readValue(responseBody, RolDTO[].class);
 
             return Arrays.asList(rolesUsuarios);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return Collections.emptyList();
         }
@@ -131,13 +130,13 @@ public class Auth0TokenController {
             JsonNode jsonNode = mapper.readTree(responseBody);
             String token = jsonNode.get("access_token").asText();
             return token;
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
     }
 
-    @PostMapping("/users")
+    @PostMapping("/usuarios")
     public ResponseEntity<String> create(@org.springframework.web.bind.annotation.RequestBody Auth0UsuarioDTO newUser){
         try {
             String token = getTokenApi();
@@ -165,7 +164,7 @@ public class Auth0TokenController {
             return ResponseEntity.status(httpStatus).body(responseBody);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear un usuario");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear un Usuario");
         }
     }
 
@@ -206,11 +205,11 @@ public class Auth0TokenController {
             return ResponseEntity.status(httpStatus).body(responseBody);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al asignar el usuario al rol.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al asignar el Usuario al Rol.");
         }
     }
 
-    @DeleteMapping("/users/roles/{usuarioId}")
+    @DeleteMapping("/usuarios/roles/{usuarioId}")
     public ResponseEntity<String> deleteRolesFromUser(@PathVariable String usuarioId, @org.springframework.web.bind.annotation.RequestBody Map<String, List<String>> requestBody) {
         try {
             String token = getTokenApi();
