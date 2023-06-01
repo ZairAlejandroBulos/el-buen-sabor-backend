@@ -40,7 +40,7 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
                 articuloManufacturadoDTO.setId(am.getId());
                 articuloManufacturadoDTO.setDenominacion(am.getDenominacion());
                 articuloManufacturadoDTO.setDescripcion(am.getDescripcion());
-                articuloManufacturadoDTO.setTiempoEstimado(am.getTiempoEstimado());
+                articuloManufacturadoDTO.setTiempoEstimadoCocina(am.getTiempoEstimadoCocina());
 
                 List<Imagen> imagenes = imagenRepository.findByArticuloManufacturadoId(am.getId());
                 List<ImagenDTO> imagenesDTO = new ArrayList<>();
@@ -82,7 +82,7 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
             articuloManufacturadoDTO.setId(articuloManufacturado.getId());
             articuloManufacturadoDTO.setDenominacion(articuloManufacturado.getDenominacion());
             articuloManufacturadoDTO.setDescripcion(articuloManufacturado.getDescripcion());
-            articuloManufacturadoDTO.setTiempoEstimado(articuloManufacturado.getTiempoEstimado());
+            articuloManufacturadoDTO.setTiempoEstimadoCocina(articuloManufacturado.getTiempoEstimadoCocina());
 
             List<Imagen> imagenes = imagenRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
             List<ImagenDTO> imagenesDTO = new ArrayList<>();
@@ -123,7 +123,7 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
                 articuloManufacturadoDTO.setId(am.getId());
                 articuloManufacturadoDTO.setDenominacion(am.getDenominacion());
                 articuloManufacturadoDTO.setDescripcion(am.getDescripcion());
-                articuloManufacturadoDTO.setTiempoEstimado(am.getTiempoEstimado());
+                articuloManufacturadoDTO.setTiempoEstimadoCocina(am.getTiempoEstimadoCocina());
 
                 List<Imagen> imagenes = imagenRepository.findByArticuloManufacturadoId(am.getId());
                 List<ImagenDTO> imagenesDTO = new ArrayList<>();

@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Time;
 
 @Entity
 @Table(name = "articulo_manufacturado")
@@ -23,7 +22,7 @@ public class ArticuloManufacturado extends Base {
 
     @Column(name = "tiempo_estimado_cocina")
     @Temporal(TemporalType.TIME)
-	private Date tiempoEstimado;
+	private Time tiempoEstimadoCocina;
 
     @ManyToOne
     @JoinColumn(name = "rubro_id")
