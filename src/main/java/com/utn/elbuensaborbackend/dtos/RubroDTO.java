@@ -14,6 +14,4 @@ public class RubroDTO extends BaseDTO {
     private String denominacion;
 
     private Long rubroPadreId;
-
-    private List<RubroDTO> subRubros;
 }
