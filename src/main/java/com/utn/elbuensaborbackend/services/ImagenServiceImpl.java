@@ -4,11 +4,14 @@ import com.utn.elbuensaborbackend.entities.Imagen;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.ImagenRepository;
 import com.utn.elbuensaborbackend.services.interfaces.ImagenService;
+import com.utn.elbuensaborbackend.util.ImagenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -36,5 +39,24 @@ public class ImagenServiceImpl extends BaseServiceImpl<Imagen, Long> implements 
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+    @Override
+    public void saveImage(MultipartFile file, String nombre) throws Exception {
+       try {
+           if (!ImagenUtil.isImage(file) || !ImagenUtil.isSizeAcceptable(file)) {
+               throw new Exception("El archivo no es una imagen o su tamaño es demasiado grande");
+           }
+
+           String fileName = ImagenUtil.generateName(nombre);
+
+           Path path = Paths.get("images").toAbsolutePath();
+           String filePath = path + File.separator + fileName;
+
+           File dest = new File(fileName);
+           file.transferTo(dest);
+       } catch (Exception e) {
+           throw new Exception(e.getMessage());
+       }
     }
 }
