@@ -12,5 +12,5 @@ public interface ImagenRepository extends BaseRepository<Imagen, Long>{
 
     @Query(value = "SELECT * FROM imagen " +
             "WHERE articulo_manufacturado_id = :articuloManufacturadoId", nativeQuery = true)
-    List<Imagen> findByArticuloManufacturadoId(@Param("articuloManufacturadoId") Long articuloManufacturadoId);
+    Imagen findByArticuloManufacturadoId(@Param("articuloManufacturadoId") Long articuloManufacturadoId);
 }

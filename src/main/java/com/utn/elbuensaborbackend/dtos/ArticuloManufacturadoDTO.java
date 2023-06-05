@@ -17,7 +17,7 @@ public class ArticuloManufacturadoDTO extends BaseDTO{
 
     private Time tiempoEstimadoCocina;
 
-    private List<ImagenDTO> imagenes;
+    private ImagenDTO imagen;
 
     private ArticuloManufacturadoPrecioVentaDTO articuloManufacturadoPrecioVenta;
 }

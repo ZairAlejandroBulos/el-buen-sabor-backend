@@ -11,6 +11,7 @@ import com.utn.elbuensaborbackend.repositories.ArticuloManufacturadoRepository;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.ImagenRepository;
 import com.utn.elbuensaborbackend.services.interfaces.ArticuloManufacturadoService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,15 +43,10 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
                 articuloManufacturadoDTO.setDescripcion(am.getDescripcion());
                 articuloManufacturadoDTO.setTiempoEstimadoCocina(am.getTiempoEstimadoCocina());
 
-                List<Imagen> imagenes = imagenRepository.findByArticuloManufacturadoId(am.getId());
-                List<ImagenDTO> imagenesDTO = new ArrayList<>();
-                for (Imagen i : imagenes) {
-                    ImagenDTO imagenDTO = new ImagenDTO();
-                    imagenDTO.setId(i.getId());
-                    imagenDTO.setNombre(i.getNombre());
-
-                    imagenesDTO.add(imagenDTO);
-                }
+                Imagen imagen = imagenRepository.findByArticuloManufacturadoId(am.getId());
+                ImagenDTO imagenDTO = new ImagenDTO();
+                imagenDTO.setId(imagen.getId());
+                imagenDTO.setNombre(imagen.getNombre());
 
                 ArticuloManufacturadoPrecioVenta articuloManufacturadoPrecioVenta =
                         articuloManufacturadoPrecioVentaRepository.findByArticuloManufacturadoId(am.getId());
@@ -61,7 +57,7 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
                 articuloManufacturadoPrecioVentaDTO.setFecha(articuloManufacturadoPrecioVenta.getFecha());
                 articuloManufacturadoPrecioVentaDTO.setPrecioVenta(articuloManufacturadoPrecioVenta.getPrecioVenta());
 
-                articuloManufacturadoDTO.setImagenes(imagenesDTO);
+                articuloManufacturadoDTO.setImagen(imagenDTO);
                 articuloManufacturadoDTO.setArticuloManufacturadoPrecioVenta(articuloManufacturadoPrecioVentaDTO);
 
                 articulosManufacturadoDTOs.add(articuloManufacturadoDTO);
@@ -84,15 +80,11 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
             articuloManufacturadoDTO.setDescripcion(articuloManufacturado.getDescripcion());
             articuloManufacturadoDTO.setTiempoEstimadoCocina(articuloManufacturado.getTiempoEstimadoCocina());
 
-            List<Imagen> imagenes = imagenRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
-            List<ImagenDTO> imagenesDTO = new ArrayList<>();
-            for (Imagen i : imagenes) {
-                ImagenDTO imagenDTO = new ImagenDTO();
-                imagenDTO.setId(i.getId());
-                imagenDTO.setNombre(i.getNombre());
+            Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
+            ImagenDTO imagenDTO = new ImagenDTO();
 
-                imagenesDTO.add(imagenDTO);
-            }
+            imagenDTO.setId(imagen.getId());
+            imagenDTO.setNombre(imagen.getNombre());
 
             ArticuloManufacturadoPrecioVenta articuloManufacturadoPrecioVenta =
                     articuloManufacturadoPrecioVentaRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
@@ -103,7 +95,7 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
             articuloManufacturadoPrecioVentaDTO.setFecha(articuloManufacturadoPrecioVenta.getFecha());
             articuloManufacturadoPrecioVentaDTO.setPrecioVenta(articuloManufacturadoPrecioVenta.getPrecioVenta());
 
-            articuloManufacturadoDTO.setImagenes(imagenesDTO);
+            articuloManufacturadoDTO.setImagen(imagenDTO);
             articuloManufacturadoDTO.setArticuloManufacturadoPrecioVenta(articuloManufacturadoPrecioVentaDTO);
 
             return articuloManufacturadoDTO;
@@ -125,16 +117,13 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
                 articuloManufacturadoDTO.setDescripcion(am.getDescripcion());
                 articuloManufacturadoDTO.setTiempoEstimadoCocina(am.getTiempoEstimadoCocina());
 
-                List<Imagen> imagenes = imagenRepository.findByArticuloManufacturadoId(am.getId());
-                List<ImagenDTO> imagenesDTO = new ArrayList<>();
-                for (Imagen i : imagenes) {
-                    ImagenDTO imagenDTO = new ImagenDTO();
-                    imagenDTO.setId(i.getId());
-                    imagenDTO.setNombre(i.getNombre());
+                Imagen imagen = imagenRepository.findByArticuloManufacturadoId(am.getId());
+                ImagenDTO imagenDTO = new ImagenDTO();
 
-                    imagenesDTO.add(imagenDTO);
-                }
-                ArticuloManufacturadoPrecioVenta articuloManufacturadoPrecioVenta =
+                imagenDTO.setId(imagen.getId());
+                    imagenDTO.setNombre(imagen.getNombre());
+
+                    ArticuloManufacturadoPrecioVenta articuloManufacturadoPrecioVenta =
                         articuloManufacturadoPrecioVentaRepository.findByArticuloManufacturadoId(am.getId());
                 ArticuloManufacturadoPrecioVentaDTO articuloManufacturadoPrecioVentaDTO =
                         new ArticuloManufacturadoPrecioVentaDTO();
@@ -143,7 +132,7 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
                 articuloManufacturadoPrecioVentaDTO.setFecha(articuloManufacturadoPrecioVenta.getFecha());
                 articuloManufacturadoPrecioVentaDTO.setPrecioVenta(articuloManufacturadoPrecioVenta.getPrecioVenta());
 
-                articuloManufacturadoDTO.setImagenes(imagenesDTO);
+                articuloManufacturadoDTO.setImagen(imagenDTO);
                 articuloManufacturadoDTO.setArticuloManufacturadoPrecioVenta(articuloManufacturadoPrecioVentaDTO);
 
                 articulosManufacturadoDTOs.add(articuloManufacturadoDTO);
