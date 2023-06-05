@@ -8,13 +8,9 @@ import lombok.Setter;
 import java.util.Date;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ArticuloInsumoStockMinimoDTO {
-
-    private Long id;
+public class ArticuloInsumoStockMinimoDTO extends BaseDTO{
 
     private Float stockMinimo;
 
     private Date fecha;
-
-    private ArticuloInsumoDTO articuloInsumo;
 }

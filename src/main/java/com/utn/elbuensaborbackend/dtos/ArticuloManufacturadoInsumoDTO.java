@@ -6,12 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ArticuloManufacturadoInsumoDTO {
+import java.util.List;
 
-    private Long id;
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+public class ArticuloManufacturadoInsumoDTO extends BaseDTO{
 
     private Integer cantidad;
 
-    private ArticuloManufacturadoDTO articuloManufacturado;
+    private Long articuloManufacturadoId;
+
+    private Long articuloInsumoId;
 }

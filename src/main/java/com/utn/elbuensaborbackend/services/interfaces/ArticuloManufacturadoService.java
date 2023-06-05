@@ -17,5 +17,4 @@ public interface ArticuloManufacturadoService {
     ArticuloManufacturado update(Long id, ArticuloManufacturadoDTO entity) throws Exception;
 
     void delete(Long id) throws Exception;
-
 }

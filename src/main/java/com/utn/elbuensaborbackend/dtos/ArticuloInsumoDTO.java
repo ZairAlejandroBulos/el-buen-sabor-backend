@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ArticuloInsumoDTO {
-
-    private Long id;
+public class ArticuloInsumoDTO extends BaseDTO{
 
     private String denominacion;
 
@@ -16,6 +14,10 @@ public class ArticuloInsumoDTO {
 
     private UnidadMedidaDTO unidadMedida;
 
-    private RubroDTO rubro;
+    private ArticuloInsumoPrecioCompraDTO articuloInsumoPrecioCompra;
+
+    private ArticuloInsumoStockMinimoDTO articuloInsumoStockMinimo;
+
+    private ArticuloInsumoStockActualDTO articuloInsumoStockActual;
 
 }

@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class UnidadMedidaDTO {
-
-    private Long id;
+public class UnidadMedidaDTO extends BaseDTO{
 
     private String denominacion;
 }

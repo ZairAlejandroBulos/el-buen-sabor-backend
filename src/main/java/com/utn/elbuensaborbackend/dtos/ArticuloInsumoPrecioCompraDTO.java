@@ -8,13 +8,9 @@ import lombok.Setter;
 import java.util.Date;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ArticuloInsumoPrecioCompraDTO {
-
-    private Long id;
+public class ArticuloInsumoPrecioCompraDTO extends BaseDTO{
 
     private Date fecha;
 
     private Double monto;
-
-    private ArticuloInsumoDTO articuloInsumo;
 }
