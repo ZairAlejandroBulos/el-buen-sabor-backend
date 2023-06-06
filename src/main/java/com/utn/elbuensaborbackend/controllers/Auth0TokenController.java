@@ -21,6 +21,7 @@ import java.util.*;
 
 import java.util.List;
 
+/*
 @RestController
 @RequestMapping("/api/v1/auth0")
 public class Auth0TokenController {
@@ -250,3 +251,4 @@ public class Auth0TokenController {
     }
 
 }
+*/

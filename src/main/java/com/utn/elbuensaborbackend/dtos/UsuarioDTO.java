@@ -1,13 +1,8 @@
 package com.utn.elbuensaborbackend.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-import java.util.List;
-
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Data
 public class UsuarioDTO extends BaseDTO {
 
     private String usuario;
