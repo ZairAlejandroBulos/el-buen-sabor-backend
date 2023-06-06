@@ -1,8 +1,10 @@
 package com.utn.elbuensaborbackend.services;
 
-/*
 import com.utn.elbuensaborbackend.dtos.RubroDTO;
 import com.utn.elbuensaborbackend.entities.Rubro;
+import com.utn.elbuensaborbackend.mappers.BaseMapper;
+import com.utn.elbuensaborbackend.mappers.RubroMapper;
+import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.RubroRepository;
 import com.utn.elbuensaborbackend.services.interfaces.RubroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,34 +15,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RubroServiceImpl implements RubroService  {
+public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> implements RubroService  {
 
     @Autowired
     private RubroRepository rubroRepository;
 
-    @Override
-    public List<RubroDTO> findAll() throws Exception {
-        try {
-            List<Rubro> rubros = rubroRepository.findAll();
-            List<RubroDTO> dtos = new ArrayList<>();
+    private final RubroMapper rubroMapper = RubroMapper.getInstance();
 
-            for (Rubro r : rubros) {
-                RubroDTO rubroDTO = new RubroDTO();
-                rubroDTO.setId(r.getId());
-                rubroDTO.setDenominacion(r.getDenominacion());
-
-                if (r.getRubroPadre() != null) {
-                    rubroDTO.setRubroPadreId(r.getRubroPadre().getId());
-                }
-
-                dtos.add(rubroDTO);
-            }
-
-            return dtos;
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new Exception(e.getMessage());
-        }
+    public RubroServiceImpl(BaseRepository<Rubro, Long> baseRepository, BaseMapper<Rubro, RubroDTO> baseMapper) {
+        super(baseRepository, baseMapper);
     }
 
     @Override
@@ -68,35 +51,12 @@ public class RubroServiceImpl implements RubroService  {
         }
     }
 
-    @Override
-    public RubroDTO findById(Long id) throws Exception {
+    public Rubro saveRubro(RubroDTO dto) throws Exception {
         try {
-            Rubro rubro = rubroRepository.findById(id).get();
-            RubroDTO rubroDTO = new RubroDTO();
+            Rubro rubro = rubroMapper.toEntity(dto);
 
-            rubroDTO.setId(rubro.getId());
-            rubroDTO.setDenominacion(rubro.getDenominacion());
-
-            if (rubro.getRubroPadre() != null) {
-                rubroDTO.setRubroPadreId(rubro.getId());
-            }
-
-            return rubroDTO;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    public Rubro save(RubroDTO entity) throws Exception {
-        try {
-            Rubro rubro = new Rubro();
-            rubro.setId(entity.getId());
-            rubro.setDenominacion(entity.getDenominacion());
-
-            if (entity.getRubroPadreId() != null) {
-                Rubro rubroPadre = rubroRepository.findById(entity.getRubroPadreId()).get();
+            if (dto.getRubroPadreId() != null) {
+                Rubro rubroPadre = rubroRepository.findById(dto.getRubroPadreId()).get();
                 rubro.setRubroPadre(rubroPadre);
             }
 
@@ -106,21 +66,18 @@ public class RubroServiceImpl implements RubroService  {
         }
     }
 
-    @Override
-    public Rubro update(Long id, RubroDTO entity) throws Exception {
+    public Rubro updateRubro(Long id, RubroDTO dto) throws Exception {
         try {
             Optional<Rubro> optional = rubroRepository.findById(id);
 
-            if (optional == null) {
-                throw new Exception("El Rubro actualizar no existe.");
+            if (optional.isEmpty()) {
+                throw new Exception("El Rubro a actualizar no existe.");
             }
 
             Rubro rubro = optional.get();
-            rubro.setId(entity.getId());
-            rubro.setDenominacion(entity.getDenominacion());
 
-            if (entity.getRubroPadreId() != null) {
-                Rubro rubroPadre = rubroRepository.findById(entity.getRubroPadreId()).get();
+            if (dto.getRubroPadreId() != null) {
+                Rubro rubroPadre = rubroRepository.findById(dto.getRubroPadreId()).get();
                 rubro.setRubroPadre(rubroPadre);
             } else {
                 rubro.setRubroPadre(null);
@@ -132,14 +89,4 @@ public class RubroServiceImpl implements RubroService  {
         }
     }
 
-    @Override
-    public void delete(Long id) throws Exception {
-        try {
-            rubroRepository.deleteById(id);
-
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
 }
-*/
