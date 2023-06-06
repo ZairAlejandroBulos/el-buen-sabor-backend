@@ -8,11 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-public abstract class BaseControllerImpl<E extends Base, D extends BaseDTO, S extends BaseServiceImpl<E, D, Long>>
-        implements BaseController<E, Long> {
+public abstract class BaseControllerImpl<E extends Base, D extends BaseDTO> implements BaseController<E, Long> {
 
     @Autowired
-    protected S service;
+    protected BaseServiceImpl<E, D, Long> service;
 
     @Override
     @GetMapping("")
