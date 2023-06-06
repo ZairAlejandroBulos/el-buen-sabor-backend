@@ -1,9 +1,10 @@
 package com.utn.elbuensaborbackend.services.interfaces;
 
-
+/*
 import com.utn.elbuensaborbackend.dtos.RubroDTO;
 import com.utn.elbuensaborbackend.entities.Rubro;
 import java.util.List;
+
 
 public interface RubroService {
 
@@ -19,3 +20,4 @@ public interface RubroService {
 
     void delete(Long id) throws Exception;
 }
+*/

@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.services;
 
+/*
 import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoInsumoDTO;
 import com.utn.elbuensaborbackend.entities.ArticuloManufacturadoInsumo;
 import com.utn.elbuensaborbackend.repositories.ArticuloManufacturadoInsumoRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class ArticuloManufacturadoInsumoServiceImpl extends BaseServiceImpl<ArticuloManufacturadoInsumo, Long>
@@ -45,4 +47,4 @@ public class ArticuloManufacturadoInsumoServiceImpl extends BaseServiceImpl<Arti
             throw new Exception(e.getMessage());
         }
     }
-}
+}*/

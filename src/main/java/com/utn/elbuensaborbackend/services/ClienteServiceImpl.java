@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.services;
 
+/*
 import com.utn.elbuensaborbackend.dtos.*;
 import com.utn.elbuensaborbackend.entities.Cliente;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implements ClienteService {
@@ -197,3 +199,4 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implement
         }
     }
 }
+*/

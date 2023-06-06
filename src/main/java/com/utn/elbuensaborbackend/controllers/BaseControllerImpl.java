@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.controllers;
 
+import com.utn.elbuensaborbackend.dtos.BaseDTO;
 import com.utn.elbuensaborbackend.entities.Base;
 import com.utn.elbuensaborbackend.services.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long> {
+public abstract class BaseControllerImpl<E extends Base, D extends BaseDTO, S extends BaseServiceImpl<E, D, Long>>
+        implements BaseController<E, Long> {
 
     @Autowired
     protected S service;
@@ -33,33 +35,13 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     }
 
     @Override
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody E entity) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @Override
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E entity) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(service.update(id, entity));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
             service.delete(id);
-            return ResponseEntity.status(HttpStatus.OK).body("");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\": \"Ocurrio un error\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\": \"Ocurrio un error\"}");
         }
     }
 

@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.services;
 
+/*
 import com.utn.elbuensaborbackend.dtos.*;
 import com.utn.elbuensaborbackend.entities.*;
 import com.utn.elbuensaborbackend.repositories.*;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class ArticuloInsumoServiceImpl implements ArticuloInsumoService {
@@ -396,3 +398,4 @@ public class ArticuloInsumoServiceImpl implements ArticuloInsumoService {
     }
 
 }
+*/

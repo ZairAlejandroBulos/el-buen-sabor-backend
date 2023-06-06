@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.controllers;
 
+/*
 import com.utn.elbuensaborbackend.entities.Cliente;
 import com.utn.elbuensaborbackend.services.ClienteServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -57,3 +58,4 @@ public class ClienteController extends BaseControllerImpl<Cliente, ClienteServic
     }
 
 }
+*/

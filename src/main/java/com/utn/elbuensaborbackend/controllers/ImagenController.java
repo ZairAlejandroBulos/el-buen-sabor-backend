@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.controllers;
 
+/*
 import com.utn.elbuensaborbackend.entities.Imagen;
 import com.utn.elbuensaborbackend.services.ImagenServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -36,3 +37,4 @@ public class ImagenController extends BaseControllerImpl<Imagen, ImagenServiceIm
         }
     }
 }
+*/

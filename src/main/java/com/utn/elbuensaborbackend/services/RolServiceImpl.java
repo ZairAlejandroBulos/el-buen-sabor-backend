@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.services;
 
+/*
 import com.utn.elbuensaborbackend.entities.Rol;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.RolRepository;
@@ -17,3 +18,4 @@ public class RolServiceImpl extends BaseServiceImpl<Rol, Long> implements RolSer
         super(baseRepository);
     }
 }
+*/

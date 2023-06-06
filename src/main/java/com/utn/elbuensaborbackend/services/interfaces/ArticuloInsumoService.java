@@ -4,6 +4,7 @@ import com.utn.elbuensaborbackend.entities.ArticuloInsumo;
 
 import java.util.List;
 
+/*
 public interface ArticuloInsumoService {
     List<ArticuloInsumoDTO> findAll() throws Exception;
 
@@ -17,3 +18,4 @@ public interface ArticuloInsumoService {
 
     void delete(Long id) throws Exception;
 }
+*/

@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.services;
 
+/*
 import com.utn.elbuensaborbackend.entities.Usuario;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.UsuarioRepository;
@@ -17,3 +18,4 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
         super(baseRepository);
     }
 }
+*/

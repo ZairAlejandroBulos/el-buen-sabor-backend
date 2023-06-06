@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.services;
 
+/*
 import com.utn.elbuensaborbackend.entities.Domicilio;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.DomicilioRepository;
@@ -17,3 +18,4 @@ public class DomicilioServiceImpl extends BaseServiceImpl<Domicilio, Long> imple
         super(baseRepository);
     }
 }
+*/

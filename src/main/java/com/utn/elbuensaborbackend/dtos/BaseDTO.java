@@ -1,11 +1,9 @@
 package com.utn.elbuensaborbackend.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+import lombok.Data;
+
+@Data
 public class BaseDTO {
     private Long id;
 }

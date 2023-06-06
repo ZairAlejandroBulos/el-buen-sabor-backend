@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.services;
 
+/*
 import com.utn.elbuensaborbackend.dtos.RubroDTO;
 import com.utn.elbuensaborbackend.entities.Rubro;
 import com.utn.elbuensaborbackend.repositories.RubroRepository;
@@ -141,3 +142,4 @@ public class RubroServiceImpl implements RubroService  {
         }
     }
 }
+*/

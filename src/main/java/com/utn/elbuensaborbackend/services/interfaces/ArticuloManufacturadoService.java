@@ -1,9 +1,11 @@
 package com.utn.elbuensaborbackend.services.interfaces;
 
+/*
 import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoDTO;
 import com.utn.elbuensaborbackend.entities.ArticuloManufacturado;
 
 import java.util.List;
+
 
 public interface ArticuloManufacturadoService {
     List<ArticuloManufacturadoDTO> findAll() throws Exception;
@@ -18,3 +20,4 @@ public interface ArticuloManufacturadoService {
 
     void delete(Long id) throws Exception;
 }
+*/

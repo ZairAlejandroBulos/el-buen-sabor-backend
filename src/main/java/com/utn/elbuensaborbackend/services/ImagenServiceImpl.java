@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.services;
 
+/*
 import com.utn.elbuensaborbackend.entities.Imagen;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.ImagenRepository;
@@ -60,3 +61,4 @@ public class ImagenServiceImpl extends BaseServiceImpl<Imagen, Long> implements 
        }
     }
 }
+*/

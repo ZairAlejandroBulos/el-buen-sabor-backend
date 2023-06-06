@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.controllers;
 
+/*
 import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoDTO;
 import com.utn.elbuensaborbackend.entities.ArticuloManufacturado;
 import com.utn.elbuensaborbackend.services.ArticuloManufacturadoServiceImpl;
@@ -85,3 +86,4 @@ public class ArticuloManufacturadoController {
     }
 
 }
+*/

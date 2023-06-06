@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.services;
 
+/*
 import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoDTO;
 import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoPrecioVentaDTO;
 import com.utn.elbuensaborbackend.dtos.ImagenDTO;
@@ -171,3 +172,4 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
         }
     }
 }
+*/

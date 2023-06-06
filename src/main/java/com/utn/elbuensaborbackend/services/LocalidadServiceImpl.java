@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.services;
 
+/*
 import com.utn.elbuensaborbackend.entities.Localidad;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.LocalidadRepository;
@@ -17,3 +18,4 @@ public class LocalidadServiceImpl extends BaseServiceImpl<Localidad, Long> imple
         super(baseRepository);
     }
 }
+*/
