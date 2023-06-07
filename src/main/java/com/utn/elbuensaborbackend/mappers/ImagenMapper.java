@@ -15,13 +15,8 @@ public interface ImagenMapper extends BaseMapper<Imagen, ImagenDTO> {
         return Mappers.getMapper(ImagenMapper.class);
     }
 
-    @Mapping(source = "articuloManufacturado.id", target = "articuloManufacturadoId")
     ImagenDTO toDTO(Imagen source);
-
-    @Mapping(target = "articuloManufacturado", ignore = true)
     Imagen toEntity(ImagenDTO source);
-
     List<ImagenDTO> toDTOsList(List<Imagen> source);
-
     List<Imagen> toEntitiesList(List<ImagenDTO> source);
 }
