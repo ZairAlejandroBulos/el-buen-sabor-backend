@@ -31,6 +31,7 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, UsuarioDTO, Lon
         super(baseRepository, baseMapper);
     }
 
+    @Override
     @Transactional
     public Usuario saveUsuario(UsuarioDTO dto) throws Exception {
         try {
@@ -48,6 +49,7 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, UsuarioDTO, Lon
         }
     }
 
+    @Override
     @Transactional
     public Usuario updateUsuario(Long id, UsuarioDTO dto) throws Exception {
         try {

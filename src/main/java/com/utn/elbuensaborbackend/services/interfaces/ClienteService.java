@@ -11,4 +11,6 @@ public interface ClienteService extends BaseService<Cliente, ClienteDTO, Long> {
     List<ClienteDTO> findAllClientesByName(String nombre) throws Exception;
     List<ClienteDTO> findAllClientesByApellido(String apellido) throws Exception;
     List<ClienteDTO> findAllClientesByNameAndApellido(String nombre, String apellido) throws Exception;
+    Cliente saveCliente(ClienteDTO dto) throws Exception;
+    Cliente updateCliente(Long id, ClienteDTO dto) throws Exception;
 }

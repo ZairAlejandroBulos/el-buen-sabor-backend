@@ -7,6 +7,7 @@ import com.utn.elbuensaborbackend.mappers.RubroMapper;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.RubroRepository;
 import com.utn.elbuensaborbackend.services.interfaces.RubroService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +52,8 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
         }
     }
 
+    @Override
+    @Transactional
     public Rubro saveRubro(RubroDTO dto) throws Exception {
         try {
             Rubro rubro = rubroMapper.toEntity(dto);
@@ -66,6 +69,8 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
         }
     }
 
+    @Override
+    @Transactional
     public Rubro updateRubro(Long id, RubroDTO dto) throws Exception {
         try {
             Optional<Rubro> optional = rubroRepository.findById(id);

@@ -2,7 +2,7 @@ package com.utn.elbuensaborbackend.controllers;
 
 import com.utn.elbuensaborbackend.dtos.LocalidadDTO;
 import com.utn.elbuensaborbackend.entities.Localidad;
-import com.utn.elbuensaborbackend.services.LocalidadServiceImpl;
+import com.utn.elbuensaborbackend.services.interfaces.LocalidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class LocalidadController extends BaseControllerImpl<Localidad, LocalidadDTO> {
 
     @Autowired
-    private LocalidadServiceImpl service;
+    private LocalidadService service;
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody LocalidadDTO dto) {

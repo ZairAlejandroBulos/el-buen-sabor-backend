@@ -2,7 +2,7 @@ package com.utn.elbuensaborbackend.controllers;
 
 import com.utn.elbuensaborbackend.dtos.ClienteDTO;
 import com.utn.elbuensaborbackend.entities.Cliente;
-import com.utn.elbuensaborbackend.services.ClienteServiceImpl;
+import com.utn.elbuensaborbackend.services.interfaces.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 public class ClienteController extends BaseControllerImpl<Cliente, ClienteDTO> {
 
     @Autowired
-    private ClienteServiceImpl service;
+    private ClienteService service;
 
     @GetMapping("/byRoles/{roles}")
     public ResponseEntity<?> getAllClientesByRoles(@PathVariable List<String> roles) {

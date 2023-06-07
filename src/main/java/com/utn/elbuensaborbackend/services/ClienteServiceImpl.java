@@ -77,6 +77,7 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, ClienteDTO, Lon
         }
     }
 
+    @Override
     @Transactional
     public Cliente saveCliente(ClienteDTO dto) throws Exception {
         try {
@@ -100,6 +101,7 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, ClienteDTO, Lon
         }
     }
 
+    @Override
     @Transactional
     public Cliente updateCliente(Long id, ClienteDTO dto) throws Exception {
         try {

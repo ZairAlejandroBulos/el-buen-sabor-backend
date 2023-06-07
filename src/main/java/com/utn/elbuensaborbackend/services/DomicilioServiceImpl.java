@@ -31,6 +31,7 @@ public class DomicilioServiceImpl extends BaseServiceImpl<Domicilio, DomicilioDT
         super(baseRepository, baseMapper);
     }
 
+    @Override
     @Transactional
     public Domicilio saveDomicilio(DomicilioDTO dto) throws Exception {
         try {
@@ -48,6 +49,7 @@ public class DomicilioServiceImpl extends BaseServiceImpl<Domicilio, DomicilioDT
         }
     }
 
+    @Override
     @Transactional
     public Domicilio updateDomicilio(Long id, DomicilioDTO dto) throws Exception {
         try {

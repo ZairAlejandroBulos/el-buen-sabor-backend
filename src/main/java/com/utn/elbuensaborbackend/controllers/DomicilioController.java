@@ -2,7 +2,7 @@ package com.utn.elbuensaborbackend.controllers;
 
 import com.utn.elbuensaborbackend.dtos.DomicilioDTO;
 import com.utn.elbuensaborbackend.entities.Domicilio;
-import com.utn.elbuensaborbackend.services.DomicilioServiceImpl;
+import com.utn.elbuensaborbackend.services.interfaces.DomicilioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class DomicilioController extends BaseControllerImpl<Domicilio, DomicilioDTO> {
 
     @Autowired
-    private DomicilioServiceImpl service;
+    private DomicilioService service;
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody DomicilioDTO dto) {
