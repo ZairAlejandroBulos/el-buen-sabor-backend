@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.Serializable;
 
+/**
+ * Interfaz base para los controlladores que manejan entidades que extienden de Base.
+ *
+ * @param <E> Tipo de Entidad que extiende de Base.
+ * @param <ID> Tipo de DTO que implementa Serializable.
+ */
 public interface BaseController<E extends Base, ID extends Serializable> {
     ResponseEntity<?> getAll();
     ResponseEntity<?> getOneById(@PathVariable ID id);

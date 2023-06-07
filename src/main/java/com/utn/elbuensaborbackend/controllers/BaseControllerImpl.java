@@ -8,11 +8,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Clase abstracta que implementa la interfaz BaseController para proporcionar funciones comunes.
+ *
+ * @param <E> Tipo de Entidad que extiende de Base.
+ * @param <D> Tipo de DTO que extiende de BaseDTO.
+ */
 public abstract class BaseControllerImpl<E extends Base, D extends BaseDTO> implements BaseController<E, Long> {
 
     @Autowired
     protected BaseService<E, D, Long> service;
 
+    /**
+     * Obtiene todos los registros de la entidad Base.
+     *
+     * @return ResponseEntity con el resultado de la operación.
+     */
     @Override
     @GetMapping("")
     public ResponseEntity<?> getAll() {
@@ -25,6 +36,12 @@ public abstract class BaseControllerImpl<E extends Base, D extends BaseDTO> impl
         }
     }
 
+    /**
+     * Obtiene un registro de la entidad Base por su ID.
+     *
+     * @param id ID del registro a obtener
+     * @return ResponseEntity con el resultado de la operación.
+     */
     @Override
     @GetMapping("/{id}")
     public ResponseEntity<?> getOneById(@PathVariable Long id) {
@@ -36,6 +53,12 @@ public abstract class BaseControllerImpl<E extends Base, D extends BaseDTO> impl
         }
     }
 
+    /**
+     * Elimina un registro de la entidad Base por su ID.
+     *
+     * @param id ID del registro a eliminar.
+     * @return ResponseEntity con el resultado de la operación.
+     */
     @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
