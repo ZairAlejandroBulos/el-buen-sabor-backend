@@ -1,14 +1,15 @@
 package com.utn.elbuensaborbackend.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+
+@Data
 public class Auth0UsuarioDTO {
+
     private String email;
+
     private String clave;
+
     private List<RolDTO> roles;
 }

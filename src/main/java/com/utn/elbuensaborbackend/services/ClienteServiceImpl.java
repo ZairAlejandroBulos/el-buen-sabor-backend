@@ -1,67 +1,47 @@
 package com.utn.elbuensaborbackend.services;
 
-/*
 import com.utn.elbuensaborbackend.dtos.*;
 import com.utn.elbuensaborbackend.entities.Cliente;
+import com.utn.elbuensaborbackend.entities.Domicilio;
+import com.utn.elbuensaborbackend.entities.Usuario;
+import com.utn.elbuensaborbackend.mappers.BaseMapper;
+import com.utn.elbuensaborbackend.mappers.ClienteMapper;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.ClienteRepository;
 import com.utn.elbuensaborbackend.services.interfaces.ClienteService;
+import com.utn.elbuensaborbackend.services.interfaces.DomicilioService;
+import com.utn.elbuensaborbackend.services.interfaces.UsuarioService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
-public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implements ClienteService {
+public class ClienteServiceImpl extends BaseServiceImpl<Cliente, ClienteDTO, Long> implements ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public ClienteServiceImpl(BaseRepository<Cliente, Long> baseRepository) {
-        super(baseRepository);
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private DomicilioService domicilioService;
+
+    private final ClienteMapper clienteMapper = ClienteMapper.getInstance();
+
+    public ClienteServiceImpl(BaseRepository<Cliente, Long> baseRepository, BaseMapper<Cliente, ClienteDTO> baseMapper) {
+        super(baseRepository, baseMapper);
     }
 
     @Override
     public List<ClienteDTO> findAllClientesByRoles(List<String> roles) throws Exception {
         try {
             List<Cliente> clientes = clienteRepository.findAllClientesByRoles(roles);
-            List<ClienteDTO> clientesDTOs = new ArrayList<>();
-
-            for(Cliente c : clientes){
-                ClienteDTO clienteDTO = new ClienteDTO();
-                clienteDTO.setId(c.getId());
-                clienteDTO.setNombre(c.getNombre());
-                clienteDTO.setApellido(c.getApellido());
-                clienteDTO.setTelefono(c.getTelefono());
-
-                RolDTO rolDTO = new RolDTO();
-                rolDTO.setId(c.getUsuario().getRol().getId());
-                rolDTO.setDenominacion(c.getUsuario().getRol().getDenominacion());
-
-                UsuarioDTO usuarioDTO = new UsuarioDTO();
-                usuarioDTO.setId(c.getUsuario().getId());
-                usuarioDTO.setUsuario(c.getUsuario().getUsuario());
-                usuarioDTO.setRol(rolDTO);
-
-                LocalidadDTO localidadDTO = new LocalidadDTO();
-                localidadDTO.setId(c.getDomicilio().getLocalidad().getId());
-                localidadDTO.setNombre(c.getDomicilio().getLocalidad().getNombre());
-
-                DomicilioDTO domicilioDTO = new DomicilioDTO();
-                domicilioDTO.setId(c.getDomicilio().getId());
-                domicilioDTO.setNumero(c.getDomicilio().getNumero());
-                domicilioDTO.setCalle(c.getDomicilio().getCalle());
-                domicilioDTO.setLocalidad(localidadDTO);
-
-                clienteDTO.setUsuario(usuarioDTO);
-                clienteDTO.setDomicilio(domicilioDTO);
-
-                clientesDTOs.add(clienteDTO);
-            }
-
-            return clientesDTOs;
+            return clienteMapper.toDTOsList(clientes);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -71,41 +51,7 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implement
     public List<ClienteDTO> findAllClientesByName(String nombre) throws Exception {
         try{
             List<Cliente> clientes = clienteRepository.findAllClientesByName(nombre);
-            List<ClienteDTO> clientesDTOs = new ArrayList<>();
-
-            for(Cliente c : clientes){
-                ClienteDTO clienteDTO = new ClienteDTO();
-                clienteDTO.setId(c.getId());
-                clienteDTO.setNombre(c.getNombre());
-                clienteDTO.setApellido(c.getApellido());
-                clienteDTO.setTelefono(c.getTelefono());
-
-                RolDTO rolDTO = new RolDTO();
-                rolDTO.setId(c.getUsuario().getRol().getId());
-                rolDTO.setDenominacion(c.getUsuario().getRol().getDenominacion());
-
-                UsuarioDTO usuarioDTO = new UsuarioDTO();
-                usuarioDTO.setId(c.getUsuario().getId());
-                usuarioDTO.setUsuario(c.getUsuario().getUsuario());
-                usuarioDTO.setRol(rolDTO);
-
-                LocalidadDTO localidadDTO = new LocalidadDTO();
-                localidadDTO.setId(c.getDomicilio().getLocalidad().getId());
-                localidadDTO.setNombre(c.getDomicilio().getLocalidad().getNombre());
-
-                DomicilioDTO domicilioDTO = new DomicilioDTO();
-                domicilioDTO.setId(c.getDomicilio().getId());
-                domicilioDTO.setNumero(c.getDomicilio().getNumero());
-                domicilioDTO.setCalle(c.getDomicilio().getCalle());
-                domicilioDTO.setLocalidad(localidadDTO);
-
-                clienteDTO.setUsuario(usuarioDTO);
-                clienteDTO.setDomicilio(domicilioDTO);
-
-                clientesDTOs.add(clienteDTO);
-            }
-
-            return clientesDTOs;
+            return clienteMapper.toDTOsList(clientes);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -115,41 +61,7 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implement
     public List<ClienteDTO> findAllClientesByApellido(String apellido) throws Exception {
         try{
             List<Cliente> clientes = clienteRepository.findAllClientesByApellido(apellido);
-            List<ClienteDTO> clientesDTOs = new ArrayList<>();
-
-            for(Cliente c : clientes){
-                ClienteDTO clienteDTO = new ClienteDTO();
-                clienteDTO.setId(c.getId());
-                clienteDTO.setNombre(c.getNombre());
-                clienteDTO.setApellido(c.getApellido());
-                clienteDTO.setTelefono(c.getTelefono());
-
-                RolDTO rolDTO = new RolDTO();
-                rolDTO.setId(c.getUsuario().getRol().getId());
-                rolDTO.setDenominacion(c.getUsuario().getRol().getDenominacion());
-
-                UsuarioDTO usuarioDTO = new UsuarioDTO();
-                usuarioDTO.setId(c.getUsuario().getId());
-                usuarioDTO.setUsuario(c.getUsuario().getUsuario());
-                usuarioDTO.setRol(rolDTO);
-
-                LocalidadDTO localidadDTO = new LocalidadDTO();
-                localidadDTO.setId(c.getDomicilio().getLocalidad().getId());
-                localidadDTO.setNombre(c.getDomicilio().getLocalidad().getNombre());
-
-                DomicilioDTO domicilioDTO = new DomicilioDTO();
-                domicilioDTO.setId(c.getDomicilio().getId());
-                domicilioDTO.setNumero(c.getDomicilio().getNumero());
-                domicilioDTO.setCalle(c.getDomicilio().getCalle());
-                domicilioDTO.setLocalidad(localidadDTO);
-
-                clienteDTO.setUsuario(usuarioDTO);
-                clienteDTO.setDomicilio(domicilioDTO);
-
-                clientesDTOs.add(clienteDTO);
-            }
-
-            return clientesDTOs;
+            return clienteMapper.toDTOsList(clientes);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -159,44 +71,69 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implement
     public List<ClienteDTO> findAllClientesByNameAndApellido(String nombre, String apellido) throws Exception {
         try{
             List<Cliente> clientes = clienteRepository.findAllClientesByNameAndApellido(nombre, apellido);
-            List<ClienteDTO> clientesDTOs = new ArrayList<>();
+            return clienteMapper.toDTOsList(clientes);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 
-            for(Cliente c : clientes){
-                ClienteDTO clienteDTO = new ClienteDTO();
-                clienteDTO.setId(c.getId());
-                clienteDTO.setNombre(c.getNombre());
-                clienteDTO.setApellido(c.getApellido());
-                clienteDTO.setTelefono(c.getTelefono());
+    @Override
+    @Transactional
+    public Cliente saveCliente(ClienteDTO dto) throws Exception {
+        try {
+            Cliente cliente = clienteMapper.toEntity(dto);
 
-                RolDTO rolDTO = new RolDTO();
-                rolDTO.setId(c.getUsuario().getRol().getId());
-                rolDTO.setDenominacion(c.getUsuario().getRol().getDenominacion());
-
-                UsuarioDTO usuarioDTO = new UsuarioDTO();
-                usuarioDTO.setId(c.getUsuario().getId());
-                usuarioDTO.setUsuario(c.getUsuario().getUsuario());
-                usuarioDTO.setRol(rolDTO);
-
-                LocalidadDTO localidadDTO = new LocalidadDTO();
-                localidadDTO.setId(c.getDomicilio().getLocalidad().getId());
-                localidadDTO.setNombre(c.getDomicilio().getLocalidad().getNombre());
-
-                DomicilioDTO domicilioDTO = new DomicilioDTO();
-                domicilioDTO.setId(c.getDomicilio().getId());
-                domicilioDTO.setNumero(c.getDomicilio().getNumero());
-                domicilioDTO.setCalle(c.getDomicilio().getCalle());
-                domicilioDTO.setLocalidad(localidadDTO);
-
-                clienteDTO.setUsuario(usuarioDTO);
-                clienteDTO.setDomicilio(domicilioDTO);
-
-                clientesDTOs.add(clienteDTO);
+            UsuarioDTO usuarioDTO = dto.getUsuario();
+            if (usuarioDTO != null && usuarioDTO.getId() == null) {
+                Usuario usuario = usuarioService.save(usuarioDTO);
+                cliente.setUsuario(usuario);
             }
 
-            return clientesDTOs;
+            DomicilioDTO domicilioDTO = dto.getDomicilio();
+            if (domicilioDTO != null && domicilioDTO.getId() == null) {
+                Domicilio domicilio = domicilioService.save(domicilioDTO);
+                cliente.setDomicilio(domicilio);
+            }
+
+            return clienteRepository.save(cliente);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public Cliente updateCliente(Long id, ClienteDTO dto) throws Exception {
+        try {
+            Optional<Cliente> optional = clienteRepository.findById(id);
+
+            if (optional.isEmpty()) {
+                throw new Exception("El Cliente a modificar no existe.");
+            }
+
+            Cliente cliente = optional.get();
+
+            UsuarioDTO usuarioDTO = dto.getUsuario();
+            if (usuarioDTO.getId() == null) {
+                Usuario usuario = usuarioService.save(usuarioDTO);
+                cliente.setUsuario(usuario);
+            } else {
+                Usuario usuario = usuarioService.update(id, usuarioDTO);
+                cliente.setUsuario(usuario);
+            }
+
+            DomicilioDTO domicilioDTO = dto.getDomicilio();
+            if (domicilioDTO.getId() == null) {
+                Domicilio domicilio = domicilioService.save(domicilioDTO);
+                cliente.setDomicilio(domicilio);
+            } else {
+                Domicilio domicilio = domicilioService.update(domicilioDTO.getId(), domicilioDTO);
+                cliente.setDomicilio(domicilio);
+            }
+
+            return clienteRepository.save(cliente);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 }
-*/

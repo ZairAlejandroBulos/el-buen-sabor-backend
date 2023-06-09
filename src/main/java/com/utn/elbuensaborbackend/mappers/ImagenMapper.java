@@ -11,7 +11,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ImagenMapper extends BaseMapper<Imagen, ImagenDTO> {
 
-    static ImagenMapper getInstance(){
+
+    static ImagenMapper getInstance() {
+
         return Mappers.getMapper(ImagenMapper.class);
     }
 

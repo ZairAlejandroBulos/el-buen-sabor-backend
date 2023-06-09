@@ -1,8 +1,9 @@
 package com.utn.elbuensaborbackend.controllers;
 
-/*
+import com.utn.elbuensaborbackend.dtos.ClienteDTO;
 import com.utn.elbuensaborbackend.entities.Cliente;
-import com.utn.elbuensaborbackend.services.ClienteServiceImpl;
+import com.utn.elbuensaborbackend.services.interfaces.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/clientes")
-public class ClienteController extends BaseControllerImpl<Cliente, ClienteServiceImpl> {
+public class ClienteController extends BaseControllerImpl<Cliente, ClienteDTO> {
+
+    @Autowired
+    private ClienteService service;
 
     @GetMapping("/byRoles/{roles}")
     public ResponseEntity<?> getAllClientesByRoles(@PathVariable List<String> roles) {
@@ -57,5 +61,25 @@ public class ClienteController extends BaseControllerImpl<Cliente, ClienteServic
         }
     }
 
+    @PostMapping("")
+    public ResponseEntity<?> save(@RequestBody ClienteDTO dto) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(service.saveCliente(dto));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\": \"Ocurrio un error\"}");
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ClienteDTO dto) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(service.updateCliente(id, dto));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\": \"Ocurrio un error\"}");
+        }
+    }
 }
-*/

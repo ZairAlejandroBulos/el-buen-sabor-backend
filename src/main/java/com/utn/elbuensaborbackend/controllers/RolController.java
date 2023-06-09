@@ -1,25 +1,25 @@
 package com.utn.elbuensaborbackend.controllers;
 
-import com.utn.elbuensaborbackend.dtos.UsuarioDTO;
-import com.utn.elbuensaborbackend.entities.Usuario;
-import com.utn.elbuensaborbackend.services.interfaces.UsuarioService;
+import com.utn.elbuensaborbackend.dtos.RolDTO;
+import com.utn.elbuensaborbackend.entities.Rol;
+import com.utn.elbuensaborbackend.services.interfaces.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/usuarios")
-public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioDTO> {
+@RequestMapping("api/v1/roles")
+public class RolController extends BaseControllerImpl<Rol, RolDTO> {
 
     @Autowired
-    private UsuarioService service;
+    private RolService service;
 
     @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody UsuarioDTO dto) {
+    public ResponseEntity<?> save(@RequestBody RolDTO dto) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.saveUsuario(dto));
+                    .body(service.save(dto));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("{\"error\": \"Ocurrio un error\"}");
@@ -27,10 +27,10 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioDTO> {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> save(@PathVariable Long id, @RequestBody UsuarioDTO dto) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody RolDTO dto) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.updateUsuario(id, dto));
+                    .body(service.update(id, dto));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("{\"error\": \"Ocurrio un error\"}");

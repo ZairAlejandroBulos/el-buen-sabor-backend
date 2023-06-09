@@ -1,7 +1,9 @@
 package com.utn.elbuensaborbackend.services;
 
-/*
+import com.utn.elbuensaborbackend.dtos.ImagenDTO;
 import com.utn.elbuensaborbackend.entities.Imagen;
+import com.utn.elbuensaborbackend.mappers.BaseMapper;
+import com.utn.elbuensaborbackend.mappers.ImagenMapper;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.ImagenRepository;
 import com.utn.elbuensaborbackend.services.interfaces.ImagenService;
@@ -17,13 +19,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class ImagenServiceImpl extends BaseServiceImpl<Imagen, Long> implements ImagenService {
+public class ImagenServiceImpl extends BaseServiceImpl<Imagen, ImagenDTO, Long> implements ImagenService {
 
     @Autowired
     private ImagenRepository imagenRepository;
 
-    public ImagenServiceImpl(BaseRepository<Imagen, Long> baseRepository) {
-        super(baseRepository);
+    private final ImagenMapper imagenMapper = ImagenMapper.getInstance();
+
+    public ImagenServiceImpl(BaseRepository<Imagen, Long> baseRepository, BaseMapper<Imagen, ImagenDTO> baseMapper) {
+        super(baseRepository, baseMapper);
     }
 
     @Override
@@ -61,4 +65,3 @@ public class ImagenServiceImpl extends BaseServiceImpl<Imagen, Long> implements 
        }
     }
 }
-*/
