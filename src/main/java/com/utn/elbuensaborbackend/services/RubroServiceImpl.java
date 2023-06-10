@@ -58,7 +58,7 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
 
             Rubro rubro = optional.get();
 
-            if (rubro.getRubroPadre() != null) {
+            if (dto.getRubroPadreId() != null) {
                 if (rubroRepository.existsById(dto.getRubroPadreId())) {
                     Rubro rubroPadre = rubroRepository.findById(dto.getRubroPadreId()).get();
                     rubro.setRubroPadre(rubroPadre);
