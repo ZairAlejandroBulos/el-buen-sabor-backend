@@ -1,9 +1,9 @@
 package com.utn.elbuensaborbackend.controllers;
 
-/*
+
 import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoDTO;
 import com.utn.elbuensaborbackend.entities.ArticuloManufacturado;
-import com.utn.elbuensaborbackend.services.ArticuloManufacturadoServiceImpl;
+import com.utn.elbuensaborbackend.services.interfaces.ArticuloManufacturadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,30 +11,32 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/articulos-manufacturados")
-public class ArticuloManufacturadoController {
+public class ArticuloManufacturadoController extends BaseControllerImpl<ArticuloManufacturado, ArticuloManufacturadoDTO> {
 
     @Autowired
-    private ArticuloManufacturadoServiceImpl service;
+    private ArticuloManufacturadoService service;
 
-    @GetMapping("")
-    public ResponseEntity<?> getAll() {
+
+
+    @GetMapping("/findAll")
+    public ResponseEntity<?> getAllArticuloManufacturado(){
         try {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findAll());
+                    .body(service.findAllArticuloManufacturado());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("{\"error\":\"Error. No se pudieron recuperar los productos por termino\"}");
+                    .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id) {
+    @GetMapping("/byId/{id}")
+    public ResponseEntity<?> getAllArticuloManufacturado(@PathVariable Long id){
         try {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findById(id));
+                    .body(service.findByIdArticuloManufacturado(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("{\"error\":\"Error. No se pudieron recuperar los productos por termino\"}");
+                    .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
 
@@ -45,45 +47,19 @@ public class ArticuloManufacturadoController {
                     .body(service.findByTermino(termino));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("{\"error\":\"Error. No se pudieron recuperar los productos por termino\"}");
+                    .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
 
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody ArticuloManufacturadoDTO entity) {
+    /*@PostMapping("")
+    public ResponseEntity<?> save(@RequestBody ArticuloManufacturadoDTO dto) {
         try {
-            ArticuloManufacturado articuloManufacturado = service.save(entity);
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(articuloManufacturado);
+                    .body(service.saveArticuloManufacturado(dto));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("{\"error\":\"Error al guardar el artículo manufacturado\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\": \"Ocurrio un error\"}");
         }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ArticuloManufacturadoDTO entity) {
-        try {
-            ArticuloManufacturado articuloManufacturado = service.update(id, entity);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(articuloManufacturado);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("{\"error\":\"Error al actualizar el artículo manufacturado\"}");
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        try {
-            service.delete(id);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body("{\"message\":\"Artículo manufacturado eliminado exitosamente\"}");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("{\"error\":\"Error al eliminar el artículo manufacturado\"}");
-        }
-    }
+    }*/
 
 }
-*/

@@ -1,26 +1,27 @@
 package com.utn.elbuensaborbackend.services;
 
-/*
+
 import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoDTO;
-import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoPrecioVentaDTO;
-import com.utn.elbuensaborbackend.dtos.ImagenDTO;
 import com.utn.elbuensaborbackend.entities.ArticuloManufacturado;
 import com.utn.elbuensaborbackend.entities.ArticuloManufacturadoPrecioVenta;
 import com.utn.elbuensaborbackend.entities.Imagen;
+import com.utn.elbuensaborbackend.mappers.ArticuloManufacturadoMapper;
+import com.utn.elbuensaborbackend.mappers.BaseMapper;
 import com.utn.elbuensaborbackend.repositories.ArticuloManufacturadoPrecioVentaRepository;
 import com.utn.elbuensaborbackend.repositories.ArticuloManufacturadoRepository;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.ImagenRepository;
+import com.utn.elbuensaborbackend.services.interfaces.ArticuloManufacturadoPrecioVentaService;
 import com.utn.elbuensaborbackend.services.interfaces.ArticuloManufacturadoService;
-import jakarta.annotation.Resource;
+import com.utn.elbuensaborbackend.services.interfaces.ImagenService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoService {
+public class ArticuloManufacturadoServiceImpl extends BaseServiceImpl<ArticuloManufacturado, ArticuloManufacturadoDTO, Long> implements ArticuloManufacturadoService {
 
     @Autowired
     private ArticuloManufacturadoRepository articuloManufacturadoRepository;
@@ -31,75 +32,57 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
     @Autowired
     private ArticuloManufacturadoPrecioVentaRepository articuloManufacturadoPrecioVentaRepository;
 
+    @Autowired
+    private ArticuloManufacturadoPrecioVentaService articuloManufacturadoPrecioVentaService;
+
+    @Autowired
+    private ImagenService imagenService;
+
+    private final ArticuloManufacturadoMapper articuloManufacturadoMapper = ArticuloManufacturadoMapper.getInstance();
+
+    public ArticuloManufacturadoServiceImpl(BaseRepository<ArticuloManufacturado, Long> baseRepository, BaseMapper<ArticuloManufacturado, ArticuloManufacturadoDTO> baseMapper) {
+        super(baseRepository, baseMapper);
+    }
+
     @Override
-    public List<ArticuloManufacturadoDTO> findAll() throws Exception {
+    public List<ArticuloManufacturadoDTO> findAllArticuloManufacturado() throws Exception {
         try {
             List<ArticuloManufacturado> articuloManufacturados = articuloManufacturadoRepository.findAll();
-            List<ArticuloManufacturadoDTO> articulosManufacturadoDTOs = new ArrayList<>();
+            List<ArticuloManufacturadoDTO> dtos = articuloManufacturadoMapper.toDTOsList(articuloManufacturados);
 
-            for (ArticuloManufacturado am : articuloManufacturados) {
-                ArticuloManufacturadoDTO articuloManufacturadoDTO = new ArticuloManufacturadoDTO();
-                articuloManufacturadoDTO.setId(am.getId());
-                articuloManufacturadoDTO.setDenominacion(am.getDenominacion());
-                articuloManufacturadoDTO.setDescripcion(am.getDescripcion());
-                articuloManufacturadoDTO.setTiempoEstimadoCocina(am.getTiempoEstimadoCocina());
+            for (int i = 0; i < articuloManufacturados.size(); i++) {
+                // ArticuloManufacturadoPrecioVenta
+                ArticuloManufacturadoPrecioVenta precioVenta = articuloManufacturadoPrecioVentaRepository.
+                        findByArticuloManufacturadoId(articuloManufacturados.get(i).getId());
+                dtos.get(i).setPrecioVenta(precioVenta.getPrecioVenta());
 
-                Imagen imagen = imagenRepository.findByArticuloManufacturadoId(am.getId());
-                ImagenDTO imagenDTO = new ImagenDTO();
-                imagenDTO.setId(imagen.getId());
-                imagenDTO.setNombre(imagen.getNombre());
-
-                ArticuloManufacturadoPrecioVenta articuloManufacturadoPrecioVenta =
-                        articuloManufacturadoPrecioVentaRepository.findByArticuloManufacturadoId(am.getId());
-                ArticuloManufacturadoPrecioVentaDTO articuloManufacturadoPrecioVentaDTO =
-                        new ArticuloManufacturadoPrecioVentaDTO();
-
-                articuloManufacturadoPrecioVentaDTO.setId(articuloManufacturadoPrecioVenta.getId());
-                articuloManufacturadoPrecioVentaDTO.setFecha(articuloManufacturadoPrecioVenta.getFecha());
-                articuloManufacturadoPrecioVentaDTO.setPrecioVenta(articuloManufacturadoPrecioVenta.getPrecioVenta());
-
-                articuloManufacturadoDTO.setImagen(imagenDTO);
-                articuloManufacturadoDTO.setArticuloManufacturadoPrecioVenta(articuloManufacturadoPrecioVentaDTO);
-
-                articulosManufacturadoDTOs.add(articuloManufacturadoDTO);
+                // Imagen
+                Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturados.get(i).getId());
+                dtos.get(i).setImagen(imagen.getNombre());
             }
 
-            return articulosManufacturadoDTOs;
+            return dtos;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public ArticuloManufacturadoDTO findById(Long id) throws Exception {
+    public ArticuloManufacturadoDTO findByIdArticuloManufacturado(Long id) throws Exception {
         try {
             ArticuloManufacturado articuloManufacturado = articuloManufacturadoRepository.findById(id).get();
-            ArticuloManufacturadoDTO articuloManufacturadoDTO = new ArticuloManufacturadoDTO();
+            ArticuloManufacturadoDTO dto = articuloManufacturadoMapper.toDTO(articuloManufacturado);
 
-            articuloManufacturadoDTO.setId(articuloManufacturado.getId());
-            articuloManufacturadoDTO.setDenominacion(articuloManufacturado.getDenominacion());
-            articuloManufacturadoDTO.setDescripcion(articuloManufacturado.getDescripcion());
-            articuloManufacturadoDTO.setTiempoEstimadoCocina(articuloManufacturado.getTiempoEstimadoCocina());
+            // ArticuloManufacturadoPrecioVenta
+            ArticuloManufacturadoPrecioVenta precioVenta = articuloManufacturadoPrecioVentaRepository.
+                    findByArticuloManufacturadoId(articuloManufacturado.getId());
+            dto.setPrecioVenta(precioVenta.getPrecioVenta());
 
+            // Imagen
             Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
-            ImagenDTO imagenDTO = new ImagenDTO();
+            dto.setImagen(imagen.getNombre());
 
-            imagenDTO.setId(imagen.getId());
-            imagenDTO.setNombre(imagen.getNombre());
-
-            ArticuloManufacturadoPrecioVenta articuloManufacturadoPrecioVenta =
-                    articuloManufacturadoPrecioVentaRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
-            ArticuloManufacturadoPrecioVentaDTO articuloManufacturadoPrecioVentaDTO =
-                    new ArticuloManufacturadoPrecioVentaDTO();
-
-            articuloManufacturadoPrecioVentaDTO.setId(articuloManufacturadoPrecioVenta.getId());
-            articuloManufacturadoPrecioVentaDTO.setFecha(articuloManufacturadoPrecioVenta.getFecha());
-            articuloManufacturadoPrecioVentaDTO.setPrecioVenta(articuloManufacturadoPrecioVenta.getPrecioVenta());
-
-            articuloManufacturadoDTO.setImagen(imagenDTO);
-            articuloManufacturadoDTO.setArticuloManufacturadoPrecioVenta(articuloManufacturadoPrecioVentaDTO);
-
-            return articuloManufacturadoDTO;
+            return dto;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -109,67 +92,53 @@ public class ArticuloManufacturadoServiceImpl implements ArticuloManufacturadoSe
     public List<ArticuloManufacturadoDTO> findByTermino(String termino) throws Exception {
         try {
             List<ArticuloManufacturado> articuloManufacturados = articuloManufacturadoRepository.findByTermino(termino);
-            List<ArticuloManufacturadoDTO> articulosManufacturadoDTOs = new ArrayList<>();
+            List<ArticuloManufacturadoDTO> dtos = articuloManufacturadoMapper.toDTOsList(articuloManufacturados);
 
-            for (ArticuloManufacturado am : articuloManufacturados) {
-                ArticuloManufacturadoDTO articuloManufacturadoDTO = new ArticuloManufacturadoDTO();
-                articuloManufacturadoDTO.setId(am.getId());
-                articuloManufacturadoDTO.setDenominacion(am.getDenominacion());
-                articuloManufacturadoDTO.setDescripcion(am.getDescripcion());
-                articuloManufacturadoDTO.setTiempoEstimadoCocina(am.getTiempoEstimadoCocina());
+            for (int i = 0; i < articuloManufacturados.size(); i++) {
+                // ArticuloManufacturadoPrecioVenta
+                ArticuloManufacturadoPrecioVenta precioVenta = articuloManufacturadoPrecioVentaRepository.
+                        findByArticuloManufacturadoId(articuloManufacturados.get(i).getId());
+                dtos.get(i).setPrecioVenta(precioVenta.getPrecioVenta());
 
-                Imagen imagen = imagenRepository.findByArticuloManufacturadoId(am.getId());
-                ImagenDTO imagenDTO = new ImagenDTO();
-
-                imagenDTO.setId(imagen.getId());
-                    imagenDTO.setNombre(imagen.getNombre());
-
-                    ArticuloManufacturadoPrecioVenta articuloManufacturadoPrecioVenta =
-                        articuloManufacturadoPrecioVentaRepository.findByArticuloManufacturadoId(am.getId());
-                ArticuloManufacturadoPrecioVentaDTO articuloManufacturadoPrecioVentaDTO =
-                        new ArticuloManufacturadoPrecioVentaDTO();
-
-                articuloManufacturadoPrecioVentaDTO.setId(articuloManufacturadoPrecioVenta.getId());
-                articuloManufacturadoPrecioVentaDTO.setFecha(articuloManufacturadoPrecioVenta.getFecha());
-                articuloManufacturadoPrecioVentaDTO.setPrecioVenta(articuloManufacturadoPrecioVenta.getPrecioVenta());
-
-                articuloManufacturadoDTO.setImagen(imagenDTO);
-                articuloManufacturadoDTO.setArticuloManufacturadoPrecioVenta(articuloManufacturadoPrecioVentaDTO);
-
-                articulosManufacturadoDTOs.add(articuloManufacturadoDTO);
+                // Imagen
+                Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturados.get(i).getId());
+                dtos.get(i).setImagen(imagen.getNombre());
             }
 
-            return articulosManufacturadoDTOs;
+            return dtos;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
-    @Override
-    public ArticuloManufacturado save(ArticuloManufacturadoDTO entity) throws Exception {
+    /*@Override
+    @Transactional
+    public ArticuloManufacturado saveArticuloManufacturado(ArticuloManufacturadoDTO dto) throws Exception {
         try {
-            return null;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
+            ArticuloManufacturado articuloManufacturado = articuloManufacturadoMapper.toEntity(dto);
 
-    @Override
-    public ArticuloManufacturado update(Long id, ArticuloManufacturadoDTO entity) throws Exception {
-        try {
-            return null;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
+            articuloManufacturado = articuloManufacturadoRepository.save(articuloManufacturado);
 
-    @Override
-    public void delete(Long id) throws Exception {
-        try {
-            articuloManufacturadoRepository.deleteById(id);
+
+            ArticuloManufacturadoPrecioVentaDTO articuloManufacturadoPrecioVentaDTO = dto.getArticuloManufacturadoPrecioVenta();
+            if(articuloManufacturadoPrecioVentaDTO != null && articuloManufacturadoPrecioVentaDTO.getId() == null){
+                ArticuloManufacturadoPrecioVenta articuloManufacturadoPrecioVenta =
+                        articuloManufacturadoPrecioVentaMapper.toEntity(articuloManufacturadoPrecioVentaDTO);
+                articuloManufacturadoPrecioVenta.setArticuloManufacturado(articuloManufacturado);
+                articuloManufacturadoPrecioVentaService.saveArticuloManufacturadoPrecioVenta(articuloManufacturadoPrecioVenta);
+            }
+
+            ImagenDTO imagenDTO = dto.getImagen();
+            if(imagenDTO != null && imagenDTO.getId() == null){
+                Imagen imagen = imagenMapper.toEntity(imagenDTO);
+                imagen.setArticuloManufacturado(articuloManufacturado);
+                imagenService.saveImagen(imagen);
+            }
+
+            return articuloManufacturado;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
-    }
+    }*/
+
 }
-*/
