@@ -1,14 +1,11 @@
 package com.utn.elbuensaborbackend.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Date;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ArticuloManufacturadoPrecioVentaDTO extends BaseDTO{
+@Data
+public class ArticuloManufacturadoPrecioVentaDTO extends BaseDTO {
 
     private Double precioVenta;
 

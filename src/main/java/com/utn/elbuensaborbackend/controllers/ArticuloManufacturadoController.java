@@ -1,7 +1,6 @@
 package com.utn.elbuensaborbackend.controllers;
 
-
-import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoDTO;
+import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoFullDTO;
 import com.utn.elbuensaborbackend.entities.ArticuloManufacturado;
 import com.utn.elbuensaborbackend.services.interfaces.ArticuloManufacturadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/articulos-manufacturados")
-public class ArticuloManufacturadoController extends BaseControllerImpl<ArticuloManufacturado, ArticuloManufacturadoDTO> {
+public class ArticuloManufacturadoController extends BaseControllerImpl<ArticuloManufacturado, ArticuloManufacturadoFullDTO> {
 
     @Autowired
     private ArticuloManufacturadoService service;
-
-
 
     @GetMapping("/findAll")
     public ResponseEntity<?> getAllArticuloManufacturado(){
@@ -30,10 +27,10 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
     }
 
     @GetMapping("/byId/{id}")
-    public ResponseEntity<?> getAllArticuloManufacturado(@PathVariable Long id){
+    public ResponseEntity<?> getArticuloManufacturadoById(@PathVariable Long id){
         try {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findByIdArticuloManufacturado(id));
+                    .body(service.findArticuloManufacturadoById(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("{\"error\": \"Ocurrio un error\"}");
@@ -51,15 +48,26 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
         }
     }
 
-    /*@PostMapping("")
-    public ResponseEntity<?> save(@RequestBody ArticuloManufacturadoDTO dto) {
+    @GetMapping("/findAllFull")
+    public ResponseEntity<?> getAllArticuloManufacturadoFull(){
         try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.saveArticuloManufacturado(dto));
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(service.findAllArticuloManufacturadoFull());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
-    }*/
+    }
+
+    @GetMapping("/full/byId/{id}")
+    public ResponseEntity<?> getArticuloManufacturadoFullById(@PathVariable Long id){
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(service.findArticuloManufacturadoFullById(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("{\"error\": \"Ocurrio un error\"}");
+        }
+    }
 
 }

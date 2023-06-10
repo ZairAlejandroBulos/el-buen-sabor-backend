@@ -2,8 +2,10 @@ package com.utn.elbuensaborbackend.dtos;
 
 import lombok.Data;
 
+import java.sql.Time;
+
 @Data
-public class ArticuloManufacturadoDTO extends BaseDTO {
+public class ArticuloManufacturadoFullDTO extends BaseDTO {
 
     private String denominacion;
 
@@ -12,4 +14,8 @@ public class ArticuloManufacturadoDTO extends BaseDTO {
     private String imagen;
 
     private Double precioVenta;
+
+    private Time tiempoEstimadoCocina;
+
+    private RubroDTO rubro;
 }
