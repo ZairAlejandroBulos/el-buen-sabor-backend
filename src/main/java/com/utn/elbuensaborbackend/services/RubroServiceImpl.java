@@ -11,8 +11,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,39 +26,18 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
     }
 
     @Override
-    public List<RubroDTO> findAllParents() throws Exception {
-        try {
-            List<Rubro> rubros = rubroRepository.findAllParents();
-            List<RubroDTO> dtos = new ArrayList<>();
-
-            for (Rubro r : rubros) {
-                RubroDTO rubroDTO = new RubroDTO();
-                rubroDTO.setId(r.getId());
-                rubroDTO.setDenominacion(r.getDenominacion());
-
-                if (r.getRubroPadre() != null) {
-                    rubroDTO.setRubroPadreId(r.getId());
-                }
-
-                dtos.add(rubroDTO);
-            }
-
-            return dtos;
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
     @Transactional
     public Rubro saveRubro(RubroDTO dto) throws Exception {
         try {
             Rubro rubro = rubroMapper.toEntity(dto);
 
             if (dto.getRubroPadreId() != null) {
-                Rubro rubroPadre = rubroRepository.findById(dto.getRubroPadreId()).get();
-                rubro.setRubroPadre(rubroPadre);
+                if (rubroRepository.existsById(dto.getRubroPadreId())) {
+                    Rubro rubroPadre = rubroRepository.findById(dto.getRubroPadreId()).get();
+                    rubro.setRubroPadre(rubroPadre);
+                } else {
+                    throw new Exception("El Rubro Padre no existe.");
+                }
             }
 
             return rubroRepository.save(rubro);
@@ -81,12 +58,18 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
 
             Rubro rubro = optional.get();
 
-            if (dto.getRubroPadreId() != null) {
-                Rubro rubroPadre = rubroRepository.findById(dto.getRubroPadreId()).get();
-                rubro.setRubroPadre(rubroPadre);
+            if (rubro.getRubroPadre() != null) {
+                if (rubroRepository.existsById(dto.getRubroPadreId())) {
+                    Rubro rubroPadre = rubroRepository.findById(dto.getRubroPadreId()).get();
+                    rubro.setRubroPadre(rubroPadre);
+                } else {
+                    throw new Exception("El Rubro Padre no existe.");
+                }
             } else {
                 rubro.setRubroPadre(null);
             }
+
+            rubro.setDenominacion(dto.getDenominacion());
 
             return rubroRepository.save(rubro);
         } catch (Exception e) {

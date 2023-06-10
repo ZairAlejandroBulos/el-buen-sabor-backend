@@ -16,17 +16,6 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroDTO> {
     @Autowired
     private RubroService service;
 
-    @GetMapping("/parents")
-    public ResponseEntity<?> getAllParents() {
-        try {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findAllParents());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody RubroDTO entity) {
         try {
