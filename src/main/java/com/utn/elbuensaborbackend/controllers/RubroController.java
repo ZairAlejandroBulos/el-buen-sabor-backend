@@ -16,6 +16,17 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroDTO> {
     @Autowired
     private RubroService service;
 
+    @GetMapping("/exists/{denominacion}")
+    public ResponseEntity<?> existsByDenominacion(@PathVariable String denominacion) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(service.existsByDenominacion(denominacion));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\": \"Ocurrio un error\"}");
+        }
+    }
+
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody RubroDTO entity) {
         try {

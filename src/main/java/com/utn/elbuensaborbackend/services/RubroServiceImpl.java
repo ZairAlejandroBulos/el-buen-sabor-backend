@@ -26,6 +26,16 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
     }
 
     @Override
+    public Boolean existsByDenominacion(String denominacion) throws Exception {
+        try {
+            Rubro rubro = rubroRepository.findByDenominacion(denominacion);
+            return rubro != null ? true : false;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     @Transactional
     public Rubro saveRubro(RubroDTO dto) throws Exception {
         try {
