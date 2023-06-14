@@ -13,4 +13,7 @@ public interface ArticuloManufacturadoService extends BaseService<ArticuloManufa
     ArticuloManufacturadoDTO findArticuloManufacturadoById(Long id) throws Exception;
     List<ArticuloManufacturadoFullDTO> findAllArticuloManufacturadoFull() throws Exception;
     ArticuloManufacturadoFullDTO findArticuloManufacturadoFullById(Long id) throws Exception;
+    ArticuloManufacturadoFullDTO saveArticuloManufacturado(ArticuloManufacturadoFullDTO dto) throws Exception;
+    ArticuloManufacturadoFullDTO updateArticuloManufacturado(Long id, ArticuloManufacturadoFullDTO dto) throws Exception;
+
 }

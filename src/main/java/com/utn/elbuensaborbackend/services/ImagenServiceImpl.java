@@ -47,20 +47,19 @@ public class ImagenServiceImpl extends BaseServiceImpl<Imagen, ImagenDTO, Long> 
     }
 
     @Override
-    public void saveImage(MultipartFile file, String nombre) throws Exception {
+    public void saveImagen(MultipartFile file, String nombre) throws Exception {
        try {
            if (!ImagenUtil.isImage(file) || !ImagenUtil.isSizeAcceptable(file)) {
                throw new Exception("El archivo no es una imagen o su tamaño es demasiado grande");
            }
 
-           String fileName = ImagenUtil.generateName(nombre);
-
            Path path = Paths.get("images").toAbsolutePath();
-           String filePath = path + File.separator + fileName;
+           String filePath = path + File.separator + nombre;
 
-           File dest = new File(fileName);
+           File dest = new File(filePath);
            file.transferTo(dest);
        } catch (Exception e) {
+           System.out.println(e.getMessage());
            throw new Exception(e.getMessage());
        }
     }

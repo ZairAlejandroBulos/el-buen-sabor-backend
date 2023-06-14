@@ -70,4 +70,25 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
         }
     }
 
+    @PostMapping("")
+    public ResponseEntity<?> save(@RequestBody ArticuloManufacturadoFullDTO dto) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(service.saveArticuloManufacturado(dto));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\": \"Ocurrio un error\"}");
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ArticuloManufacturadoFullDTO dto) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(service.updateArticuloManufacturado(id, dto));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\": \"Ocurrio un error\"}");
+        }
+    }
 }

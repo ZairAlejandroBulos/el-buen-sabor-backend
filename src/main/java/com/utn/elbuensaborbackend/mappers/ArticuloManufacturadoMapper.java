@@ -23,6 +23,8 @@ public interface ArticuloManufacturadoMapper extends BaseMapper<ArticuloManufact
     List<ArticuloManufacturadoDTO> toSimpleDTOsList(List<ArticuloManufacturado> source);
 
     ArticuloManufacturadoFullDTO toDTO(ArticuloManufacturado source);
+
+    @Mapping(target = "source.tiempoEstimadoCocina", dateFormat = "HH:mm:ss")
     ArticuloManufacturado toEntity(ArticuloManufacturadoFullDTO source);
     List<ArticuloManufacturadoFullDTO> toDTOsList(List<ArticuloManufacturado> source);
     List<ArticuloManufacturado> toEntitiesList(List<ArticuloManufacturadoFullDTO> source);

@@ -32,7 +32,7 @@ public class ImagenController extends BaseControllerImpl<Imagen, ImagenDTO> {
     @PostMapping("/{nombre}")
     public ResponseEntity<?> saveImagen(@RequestParam("file") MultipartFile file, @PathVariable String nombre) {
         try {
-            service.saveImage(file, nombre);
+            service.saveImagen(file, nombre);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
