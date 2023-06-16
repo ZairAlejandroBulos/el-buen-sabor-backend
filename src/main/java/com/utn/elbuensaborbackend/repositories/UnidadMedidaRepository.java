@@ -7,8 +7,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UnidadMedidaRepository extends BaseRepository<UnidadMedida, Long> {
-    @Query(value = "SELECT unidad_medida.* FROM unidad_medida " +
+    /*@Query(value = "SELECT unidad_medida.* FROM unidad_medida " +
             "INNER JOIN articulo_insumo ON unidad_medida.id_unidad_medida = articulo_insumo.unidad_medida_id " +
             "WHERE articulo_insumo.id_articulo_insumo = :articuloInsumoId", nativeQuery = true)
-    UnidadMedida findByInsumoId(@Param("articuloInsumoId") Long articuloInsumoId);
+    UnidadMedida findByInsumoId(@Param("articuloInsumoId") Long articuloInsumoId);*/
+
+    @Query(value = "SELECT * FROM unidad_medida WHERE denominacion = :denominacion", nativeQuery = true)
+    UnidadMedida findByDenominacion(@Param("denominacion") String denominacion);
 }
