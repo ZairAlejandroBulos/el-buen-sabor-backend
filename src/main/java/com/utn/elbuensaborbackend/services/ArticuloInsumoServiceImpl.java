@@ -1,8 +1,10 @@
 package com.utn.elbuensaborbackend.services;
 
-
-import com.utn.elbuensaborbackend.dtos.*;
-import com.utn.elbuensaborbackend.entities.*;
+import com.utn.elbuensaborbackend.dtos.ArticuloInsumoFullDTO;
+import com.utn.elbuensaborbackend.entities.ArticuloInsumo;
+import com.utn.elbuensaborbackend.entities.ArticuloInsumoPrecioCompra;
+import com.utn.elbuensaborbackend.entities.ArticuloInsumoStockActual;
+import com.utn.elbuensaborbackend.entities.ArticuloInsumoStockMinimo;
 import com.utn.elbuensaborbackend.mappers.ArticuloInsumoMapper;
 import com.utn.elbuensaborbackend.mappers.BaseMapper;
 import com.utn.elbuensaborbackend.mappers.RubroMapper;
@@ -18,10 +20,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-
 @Service
-public class ArticuloInsumoServiceImpl
-        extends BaseServiceImpl<ArticuloInsumo, ArticuloInsumoFullDTO, Long>
+public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, ArticuloInsumoFullDTO, Long>
         implements ArticuloInsumoService {
 
     @Autowired
@@ -112,56 +112,31 @@ public class ArticuloInsumoServiceImpl
             articuloInsumo = articuloInsumoRepository.save(articuloInsumo);
 
             // ArticuloInsumoPrecioCompra
-            ArticuloInsumoPrecioCompra precioCompraDB = articuloInsumoPrecioCompraRepository.findByInsumoId(articuloInsumo.getId());
-            if (precioCompraDB != null ) {
-                if (!Objects.equals(dto.getPrecioCompra(), precioCompraDB.getMonto())) {
-                    articuloInsumoPrecioCompraRepository.save(new ArticuloInsumoPrecioCompra(
-                            new Date(),
-                            dto.getPrecioCompra(),
-                            articuloInsumo));
-                }
-            } else {
-                articuloInsumoPrecioCompraRepository.save(new ArticuloInsumoPrecioCompra(
-                        new Date(),
-                        dto.getPrecioCompra(),
-                        articuloInsumo));
-            }
+            ArticuloInsumoPrecioCompra precioCompra = new ArticuloInsumoPrecioCompra(
+                    new Date(),
+                    dto.getPrecioCompra(),
+                    articuloInsumo
+            );
+            articuloInsumoPrecioCompraRepository.save(precioCompra);
 
             // ArticuloInsumoStockMinimo
-            ArticuloInsumoStockMinimo stockMinimoDB = articuloInsumoStockMinimoRepository.findByInsumoId(articuloInsumo.getId());
-            if (stockMinimoDB != null) {
-                if (!Objects.equals(dto.getStockMinimo(), stockMinimoDB.getStockMinimo())) {
-                    articuloInsumoStockMinimoRepository.save(new ArticuloInsumoStockMinimo(
-                            dto.getStockMinimo(),
-                            new Date(),
-                            articuloInsumo));
-                }
-            } else {
-                articuloInsumoStockMinimoRepository.save(new ArticuloInsumoStockMinimo(
-                        dto.getStockMinimo(),
-                        new Date(),
-                        articuloInsumo));
-            }
+            ArticuloInsumoStockMinimo stockMinimo = new ArticuloInsumoStockMinimo(
+                    dto.getStockMinimo(),
+                    new Date(),
+                    articuloInsumo
+            );
+            articuloInsumoStockMinimoRepository.save(stockMinimo);
 
             // ArticuloInsumoStockActual
-            ArticuloInsumoStockActual stockActualDB =
-                    articuloInsumoStockActualRepository.findByInsumoId(articuloInsumo.getId());
-            if (stockActualDB == null) {
-                articuloInsumoStockActualRepository.save(new ArticuloInsumoStockActual(
-                        dto.getStockActual(),
-                        new Date(),
-                        articuloInsumo
-                ));
-            } else {
-                stockActualDB.setStockActual(dto.getStockActual());
-                stockActualDB.setFecha(new Date());
-                stockActualDB.setArticuloInsumo(articuloInsumo);
-                articuloInsumoStockActualRepository.save(stockActualDB);
-            }
+            ArticuloInsumoStockActual stockActual = new ArticuloInsumoStockActual(
+                    dto.getStockActual(),
+                    new Date(),
+                    articuloInsumo
+            );
+            articuloInsumoStockActualRepository.save(stockActual);
 
             return articuloInsumoMapper.toDTO(articuloInsumo);
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
             throw new Exception(e.getMessage());
         }
     }
@@ -190,13 +165,15 @@ public class ArticuloInsumoServiceImpl
                     articuloInsumoPrecioCompraRepository.save(new ArticuloInsumoPrecioCompra(
                             new Date(),
                             dto.getPrecioCompra(),
-                            articuloInsumo));
+                            articuloInsumo)
+                    );
                 }
             } else {
                 articuloInsumoPrecioCompraRepository.save(new ArticuloInsumoPrecioCompra(
                         new Date(),
                         dto.getPrecioCompra(),
-                        articuloInsumo));
+                        articuloInsumo)
+                );
             }
 
             // ArticuloInsumoStockMinimo
@@ -206,13 +183,15 @@ public class ArticuloInsumoServiceImpl
                     articuloInsumoStockMinimoRepository.save(new ArticuloInsumoStockMinimo(
                             dto.getStockMinimo(),
                             new Date(),
-                            articuloInsumo));
+                            articuloInsumo)
+                    );
                 }
             } else {
                 articuloInsumoStockMinimoRepository.save(new ArticuloInsumoStockMinimo(
                         dto.getStockMinimo(),
                         new Date(),
-                        articuloInsumo));
+                        articuloInsumo)
+                );
             }
 
             // ArticuloInsumoStockActual
@@ -237,70 +216,4 @@ public class ArticuloInsumoServiceImpl
         }
     }
 
-
-
-    /*@Override
-    public List<ArticuloInsumoDTO> findBebidas() throws Exception {
-        try {
-            List<ArticuloInsumo> articuloInsumo = articuloInsumoRepository.findBebidas();
-            List<ArticuloInsumoDTO> articuloInsumoDTOs = new ArrayList<>();
-
-            for (ArticuloInsumo ai : articuloInsumo) {
-                ArticuloInsumoDTO articuloInsumoDTO = new ArticuloInsumoDTO();
-                articuloInsumoDTO.setId(ai.getId());
-                articuloInsumoDTO.setEsInsumo(ai.getEsInsumo());
-                articuloInsumoDTO.setDenominacion(ai.getDenominacion());
-
-                //PRECIO COMPRA
-                ArticuloInsumoPrecioCompra precioCompra = articuloInsumoPrecioCompraRepository.findByInsumoId(ai.getId());
-                ArticuloInsumoPrecioCompraDTO precioCompraDTO = new ArticuloInsumoPrecioCompraDTO();
-
-                precioCompraDTO.setId(precioCompra.getId());
-                precioCompraDTO.setFecha(precioCompra.getFecha());
-                precioCompraDTO.setMonto(precioCompra.getMonto());
-
-
-                //STOCK MINIMO
-                ArticuloInsumoStockMinimo articuloInsumoStockMinimo =
-                        articuloInsumoStockMinimoRepository.findByInsumoId(ai.getId());
-                ArticuloInsumoStockMinimoDTO articuloInsumoStockMinimoDTO =
-                        new ArticuloInsumoStockMinimoDTO();
-
-                articuloInsumoStockMinimoDTO.setId(articuloInsumoStockMinimo.getId());
-                articuloInsumoStockMinimoDTO.setStockMinimo(articuloInsumoStockMinimo.getStockMinimo());
-                articuloInsumoStockMinimoDTO.setFecha(articuloInsumoStockMinimo.getFecha());
-
-                //STOCK ACTUAL
-                ArticuloInsumoStockActual articuloInsumoStockActual =
-                        articuloInsumoStockActualRepository.findByInsumoId(ai.getId());
-                ArticuloInsumoStockActualDTO articuloInsumoStockActualDTO =
-                        new ArticuloInsumoStockActualDTO();
-
-                articuloInsumoStockActualDTO.setId(articuloInsumoStockActual.getId());
-                articuloInsumoStockActualDTO.setStockActual(articuloInsumoStockActual.getStockActual());
-                articuloInsumoStockActualDTO.setFecha(articuloInsumoStockActual.getFecha());
-                //UNIDAD MEDIDA
-                UnidadMedida unidadMedida =
-                        unidadMedidaRepository.findByInsumoId(ai.getId());
-
-                UnidadMedidaDTO unidadMedidaDTO =
-                        new UnidadMedidaDTO();
-
-                unidadMedidaDTO.setId(unidadMedida.getId());
-                unidadMedidaDTO.setDenominacion(unidadMedida.getDenominacion());
-
-                articuloInsumoDTO.setArticuloInsumoPrecioCompra(precioCompraDTO);
-                articuloInsumoDTO.setArticuloInsumoStockActual(articuloInsumoStockActualDTO);
-                articuloInsumoDTO.setArticuloInsumoStockMinimo(articuloInsumoStockMinimoDTO);
-                articuloInsumoDTO.setUnidadMedida(unidadMedidaDTO);
-
-                articuloInsumoDTOs.add(articuloInsumoDTO);
-            }
-
-            return articuloInsumoDTOs;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new Exception(e.getMessage());
-        }
-    }*/
 }
