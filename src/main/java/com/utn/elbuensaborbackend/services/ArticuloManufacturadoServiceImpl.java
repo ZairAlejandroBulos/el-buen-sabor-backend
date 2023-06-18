@@ -13,7 +13,6 @@ import com.utn.elbuensaborbackend.repositories.ArticuloManufacturadoRepository;
 import com.utn.elbuensaborbackend.repositories.BaseRepository;
 import com.utn.elbuensaborbackend.repositories.ImagenRepository;
 import com.utn.elbuensaborbackend.services.interfaces.ArticuloManufacturadoService;
-import com.utn.elbuensaborbackend.services.interfaces.ImagenService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -166,7 +165,8 @@ public class ArticuloManufacturadoServiceImpl
             articuloManufacturado = articuloManufacturadoRepository.save(articuloManufacturado);
 
             // Imagen
-            imagenRepository.save(new Imagen(dto.getImagen(), articuloManufacturado));
+            Imagen imagen = new Imagen(dto.getImagen(), articuloManufacturado);
+            imagenRepository.save(imagen);
 
             // ArticuloManufacturadoPrecioVenta
             ArticuloManufacturadoPrecioVenta precioVenta = new ArticuloManufacturadoPrecioVenta(
@@ -200,17 +200,31 @@ public class ArticuloManufacturadoServiceImpl
             articuloManufacturado = articuloManufacturadoRepository.save(articuloManufacturado);
 
             // Imagen
-            Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
-            if (!Objects.equals(dto.getImagen(), imagen.getNombre())) {
-                imagen.setNombre(dto.getImagen());
-                imagen.setArticuloManufacturado(articuloManufacturado);
+            Imagen imagenDB = imagenRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
+            if (imagenDB != null) {
+                if (!Objects.equals(dto.getImagen(), imagenDB.getNombre())) {
+                    imagenDB.setNombre(dto.getImagen());
+                    imagenDB.setArticuloManufacturado(articuloManufacturado);
+                    imagenRepository.save(imagenDB);
+                }
+            } else {
+                Imagen imagen = new Imagen(dto.getImagen(), articuloManufacturado);
                 imagenRepository.save(imagen);
             }
 
             // ArticuloManufacturadoPrecioVenta
             ArticuloManufacturadoPrecioVenta precioVentaDB =
                     articuloManufacturadoPrecioVentaRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
-            if (!Objects.equals(dto.getPrecioVenta(), precioVentaDB.getPrecioVenta())) {
+            if (precioVentaDB != null) {
+                if (!Objects.equals(dto.getPrecioVenta(), precioVentaDB.getPrecioVenta())) {
+                    ArticuloManufacturadoPrecioVenta precioVenta = new ArticuloManufacturadoPrecioVenta(
+                            dto.getPrecioVenta(),
+                            new Date(),
+                            articuloManufacturado
+                    );
+                    articuloManufacturadoPrecioVentaRepository.save(precioVenta);
+                }
+            } else {
                 ArticuloManufacturadoPrecioVenta precioVenta = new ArticuloManufacturadoPrecioVenta(
                         dto.getPrecioVenta(),
                         new Date(),
