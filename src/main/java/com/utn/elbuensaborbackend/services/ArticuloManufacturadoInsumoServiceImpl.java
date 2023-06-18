@@ -1,7 +1,5 @@
 package com.utn.elbuensaborbackend.services;
 
-
-import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoFullDTO;
 import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoInsumoDTO;
 import com.utn.elbuensaborbackend.entities.ArticuloManufacturadoInsumo;
 import com.utn.elbuensaborbackend.mappers.ArticuloManufacturadoInsumoMapper;
@@ -23,9 +21,6 @@ public class ArticuloManufacturadoInsumoServiceImpl extends BaseServiceImpl<Arti
     private ArticuloManufacturadoInsumoRepository articuloManufacturadoInsumoRepository;
 
     @Autowired
-    private ArticuloManufacturadoServiceImpl articuloManufacturadoService;
-
-    @Autowired
     private ArticuloManufacturadoInsumoMapper articuloManufacturadoInsumoMapper = ArticuloManufacturadoInsumoMapper.getInstance();
 
     public ArticuloManufacturadoInsumoServiceImpl(BaseRepository<ArticuloManufacturadoInsumo, Long> baseRepository,
@@ -33,12 +28,11 @@ public class ArticuloManufacturadoInsumoServiceImpl extends BaseServiceImpl<Arti
         super(baseRepository, baseMapper);
     }
 
+    @Override
     public List<ArticuloManufacturadoInsumoDTO> findByArticuloManufacturadoId(Long id) throws Exception {
         try {
-            ArticuloManufacturadoFullDTO articuloManufacturado = articuloManufacturadoService.findById(id);
-
-            List<ArticuloManufacturadoInsumo> entities = articuloManufacturadoInsumoRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
-
+            List<ArticuloManufacturadoInsumo> entities =
+                    articuloManufacturadoInsumoRepository.findByArticuloManufacturadoId(id);
             return articuloManufacturadoInsumoMapper.toDTOsList(entities);
         } catch (Exception e) {
             throw new Exception(e.getMessage());

@@ -1,13 +1,13 @@
 package com.utn.elbuensaborbackend.dtos;
 
-import lombok.*;
+import lombok.Data;
 
 @Data
-public class ArticuloManufacturadoInsumoDTO extends BaseDTO{
+public class ArticuloManufacturadoInsumoDTO extends BaseDTO {
 
     private Integer cantidad;
 
-    private ArticuloInsumoDTO articuloInsumoId;
+    private ArticuloInsumoDTO articuloInsumo;
 
-    private ArticuloManufacturadoDTO articuloManufacturadoDTO;
+    private ArticuloManufacturadoDTO articuloManufacturado;
 }
