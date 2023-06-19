@@ -19,6 +19,10 @@ public class Rubro extends Base  {
     @Column(name = "denominacion", nullable = false, length = 20)
     private String denominacion;
 
+    @Column(name = "bloqueado")
+    @Convert(converter = org.hibernate.type.NumericBooleanConverter.class)
+    private Boolean bloqueado;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rubro_padre_id")
     @JsonBackReference

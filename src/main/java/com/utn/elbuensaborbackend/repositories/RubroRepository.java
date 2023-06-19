@@ -9,6 +9,9 @@ import java.util.List;
 @Repository
 public interface RubroRepository extends BaseRepository<Rubro, Long> {
 
+    @Query(value = "SELECT * FROM rubro WHERE bloqueado = false", nativeQuery = true)
+    List<Rubro> findDesbloqueados();
+
     @Query(value = "SELECT * FROM rubro WHERE denominacion = :denominacion", nativeQuery = true)
     Rubro findByDenominacion(@Param("denominacion") String denominacion);
 }

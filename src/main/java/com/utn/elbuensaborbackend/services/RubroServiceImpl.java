@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +24,16 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
 
     public RubroServiceImpl(BaseRepository<Rubro, Long> baseRepository, BaseMapper<Rubro, RubroDTO> baseMapper) {
         super(baseRepository, baseMapper);
+    }
+
+    @Override
+    public List<RubroDTO> findDesbloqueados() throws Exception {
+        try {
+            List<Rubro> rubros = rubroRepository.findDesbloqueados();
+            return rubroMapper.toDTOsList(rubros);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
@@ -87,4 +98,32 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
         }
     }
 
+    @Override
+    @Transactional
+    public void bloquearDesbloquear(Long id) throws Exception {
+        try {
+            Optional<Rubro> optional = rubroRepository.findById(id);
+
+            if (optional.isEmpty()) {
+                throw new Exception("El Rubro a bloquear o desbloquear no existe.");
+            }
+
+            Rubro rubro = optional.get();
+            recursiveBloquearDesbloquear(rubro);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    private void recursiveBloquearDesbloquear(Rubro entity) {
+        entity.setBloqueado(!entity.getBloqueado());
+
+        if (entity.getSubRubros() != null && !entity.getSubRubros().isEmpty()) {
+            for (Rubro subRubro : entity.getSubRubros()) {
+                recursiveBloquearDesbloquear(subRubro);
+            }
+        }
+
+        rubroRepository.save(entity);
+    }
 }
