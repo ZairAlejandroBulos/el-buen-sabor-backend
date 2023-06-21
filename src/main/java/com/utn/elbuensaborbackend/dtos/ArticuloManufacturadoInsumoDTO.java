@@ -7,7 +7,7 @@ public class ArticuloManufacturadoInsumoDTO extends BaseDTO {
 
     private Integer cantidad;
 
-    private ArticuloInsumoDTO articuloInsumo;
+    private ArticuloInsumoFullDTO articuloInsumo;
 
-    private ArticuloManufacturadoDTO articuloManufacturado;
+    private ArticuloManufacturadoFullDTO articuloManufacturado;
 }
