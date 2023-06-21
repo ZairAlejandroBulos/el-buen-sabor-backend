@@ -8,12 +8,7 @@ import java.util.List;
 
 public interface ArticuloManufacturadoService extends BaseService<ArticuloManufacturado, ArticuloManufacturadoFullDTO, Long> {
 
-    List<ArticuloManufacturadoDTO> findAllArticuloManufacturado() throws Exception;
+    List<ArticuloManufacturadoDTO> findAllSimple() throws Exception;
+    ArticuloManufacturadoDTO findSimpleById(Long id) throws Exception;
     List<ArticuloManufacturadoDTO> findByTermino(String termino) throws Exception;
-    ArticuloManufacturadoDTO findArticuloManufacturadoById(Long id) throws Exception;
-    List<ArticuloManufacturadoFullDTO> findAllArticuloManufacturadoFull() throws Exception;
-    ArticuloManufacturadoFullDTO findArticuloManufacturadoFullById(Long id) throws Exception;
-    ArticuloManufacturadoFullDTO saveArticuloManufacturado(ArticuloManufacturadoFullDTO dto) throws Exception;
-    ArticuloManufacturadoFullDTO updateArticuloManufacturado(Long id, ArticuloManufacturadoFullDTO dto) throws Exception;
-
 }

@@ -31,49 +31,4 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, UsuarioDTO, Lon
         super(baseRepository, baseMapper);
     }
 
-    @Override
-    @Transactional
-    public Usuario saveUsuario(UsuarioDTO dto) throws Exception {
-        try {
-            Usuario usuario = usuarioMapper.toEntity(dto);
-
-            RolDTO rolDTO = dto.getRol();
-            if (rolDTO != null && rolDTO.getId() == null) {
-                Rol rol = rolService.save(rolDTO);
-                usuario.setRol(rol);
-            }
-
-            return usuarioRepository.save(usuario);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    @Transactional
-    public Usuario updateUsuario(Long id, UsuarioDTO dto) throws Exception {
-        try {
-            Optional<Usuario> optional = usuarioRepository.findById(id);
-
-            if (optional.isEmpty()) {
-                throw new Exception("El Usuario a actualizar no existe.");
-            }
-
-            Usuario usuario = optional.get();
-
-            RolDTO rolDTO = dto.getRol();
-            if (rolDTO.getId() == null) {
-                Rol rol = rolService.save(rolDTO);
-                usuario.setRol(rol);
-            } else {
-                Rol rol = rolService.update(rolDTO.getId(), rolDTO);
-                usuario.setRol(rol);
-            }
-
-            return usuarioRepository.save(usuario);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
 }

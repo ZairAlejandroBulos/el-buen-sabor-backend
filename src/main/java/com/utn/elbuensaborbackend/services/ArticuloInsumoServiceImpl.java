@@ -49,7 +49,7 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
     }
 
     @Override
-    public List<ArticuloInsumoFullDTO> findAllArticuloInsumoFull() throws Exception{
+    public List<ArticuloInsumoFullDTO> findAll() throws Exception {
         try {
             List<ArticuloInsumo> articuloInsumos = articuloInsumoRepository.findAll();
             List<ArticuloInsumoFullDTO> dtos = articuloInsumoMapper.toDTOsList(articuloInsumos);
@@ -78,7 +78,7 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
     }
 
     @Override
-    public ArticuloInsumoFullDTO findArticuloInsumoFullById(Long id) throws Exception{
+    public ArticuloInsumoFullDTO findById(Long id) throws Exception{
         try {
             ArticuloInsumo articuloInsumo = articuloInsumoRepository.findById(id).get();
             ArticuloInsumoFullDTO dto = articuloInsumoMapper.toDTO(articuloInsumo);
@@ -106,7 +106,7 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
 
     @Override
     @Transactional
-    public ArticuloInsumoFullDTO saveArticuloInsumo(ArticuloInsumoFullDTO dto) throws Exception {
+    public ArticuloInsumo save(ArticuloInsumoFullDTO dto) throws Exception {
         try{
             ArticuloInsumo articuloInsumo = articuloInsumoMapper.toEntity(dto);
             articuloInsumo = articuloInsumoRepository.save(articuloInsumo);
@@ -135,7 +135,7 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
             );
             articuloInsumoStockActualRepository.save(stockActual);
 
-            return articuloInsumoMapper.toDTO(articuloInsumo);
+            return articuloInsumo;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -143,7 +143,7 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
 
     @Override
     @Transactional
-    public ArticuloInsumoFullDTO updateArticuloInsumo(Long id, ArticuloInsumoFullDTO dto) throws Exception{
+    public ArticuloInsumo update(Long id, ArticuloInsumoFullDTO dto) throws Exception {
         try {
             Optional<ArticuloInsumo> optional = articuloInsumoRepository.findById(id);
 
@@ -210,7 +210,7 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
                 articuloInsumoStockActualRepository.save(stockActualDB);
             }
 
-            return articuloInsumoMapper.toDTO(articuloInsumo);
+            return articuloInsumo;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

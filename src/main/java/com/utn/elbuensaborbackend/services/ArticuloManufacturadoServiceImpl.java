@@ -8,10 +8,7 @@ import com.utn.elbuensaborbackend.entities.Imagen;
 import com.utn.elbuensaborbackend.mappers.ArticuloManufacturadoMapper;
 import com.utn.elbuensaborbackend.mappers.BaseMapper;
 import com.utn.elbuensaborbackend.mappers.RubroMapper;
-import com.utn.elbuensaborbackend.repositories.ArticuloManufacturadoPrecioVentaRepository;
-import com.utn.elbuensaborbackend.repositories.ArticuloManufacturadoRepository;
-import com.utn.elbuensaborbackend.repositories.BaseRepository;
-import com.utn.elbuensaborbackend.repositories.ImagenRepository;
+import com.utn.elbuensaborbackend.repositories.*;
 import com.utn.elbuensaborbackend.services.interfaces.ArticuloManufacturadoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,51 +44,7 @@ public class ArticuloManufacturadoServiceImpl
     }
 
     @Override
-    public List<ArticuloManufacturadoDTO> findAllArticuloManufacturado() throws Exception {
-        try {
-            List<ArticuloManufacturado> articuloManufacturados = articuloManufacturadoRepository.findAll();
-            List<ArticuloManufacturadoDTO> dtos = articuloManufacturadoMapper.toSimpleDTOsList(articuloManufacturados);
-
-            for (int i = 0; i < articuloManufacturados.size(); i++) {
-                // ArticuloManufacturadoPrecioVenta
-                ArticuloManufacturadoPrecioVenta precioVenta = articuloManufacturadoPrecioVentaRepository.
-                        findByArticuloManufacturadoId(articuloManufacturados.get(i).getId());
-                dtos.get(i).setPrecioVenta(precioVenta.getPrecioVenta());
-
-                // Imagen
-                Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturados.get(i).getId());
-                dtos.get(i).setImagen(imagen.getNombre());
-            }
-
-            return dtos;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    public ArticuloManufacturadoDTO findArticuloManufacturadoById(Long id) throws Exception {
-        try {
-            ArticuloManufacturado articuloManufacturado = articuloManufacturadoRepository.findById(id).get();
-            ArticuloManufacturadoDTO dto = articuloManufacturadoMapper.toSimpleDTO(articuloManufacturado);
-
-            // ArticuloManufacturadoPrecioVenta
-            ArticuloManufacturadoPrecioVenta precioVenta = articuloManufacturadoPrecioVentaRepository.
-                    findByArticuloManufacturadoId(articuloManufacturado.getId());
-            dto.setPrecioVenta(precioVenta.getPrecioVenta());
-
-            // Imagen
-            Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
-            dto.setImagen(imagen.getNombre());
-
-            return dto;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    public List<ArticuloManufacturadoFullDTO> findAllArticuloManufacturadoFull() throws Exception {
+    public List<ArticuloManufacturadoFullDTO> findAll() throws Exception {
         try {
             List<ArticuloManufacturado> articuloManufacturados = articuloManufacturadoRepository.findAll();
             List<ArticuloManufacturadoFullDTO> dtos = articuloManufacturadoMapper.toDTOsList(articuloManufacturados);
@@ -114,10 +67,54 @@ public class ArticuloManufacturadoServiceImpl
     }
 
     @Override
-    public ArticuloManufacturadoFullDTO findArticuloManufacturadoFullById(Long id) throws Exception {
+    public ArticuloManufacturadoFullDTO findById(Long id) throws Exception {
         try {
             ArticuloManufacturado articuloManufacturado = articuloManufacturadoRepository.findById(id).get();
             ArticuloManufacturadoFullDTO dto = articuloManufacturadoMapper.toDTO(articuloManufacturado);
+
+            // ArticuloManufacturadoPrecioVenta
+            ArticuloManufacturadoPrecioVenta precioVenta = articuloManufacturadoPrecioVentaRepository.
+                    findByArticuloManufacturadoId(articuloManufacturado.getId());
+            dto.setPrecioVenta(precioVenta.getPrecioVenta());
+
+            // Imagen
+            Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
+            dto.setImagen(imagen.getNombre());
+
+            return dto;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<ArticuloManufacturadoDTO> findAllSimple() throws Exception {
+        try {
+            List<ArticuloManufacturado> articuloManufacturados = articuloManufacturadoRepository.findAll();
+            List<ArticuloManufacturadoDTO> dtos = articuloManufacturadoMapper.toSimpleDTOsList(articuloManufacturados);
+
+            for (int i = 0; i < articuloManufacturados.size(); i++) {
+                // ArticuloManufacturadoPrecioVenta
+                ArticuloManufacturadoPrecioVenta precioVenta = articuloManufacturadoPrecioVentaRepository.
+                        findByArticuloManufacturadoId(articuloManufacturados.get(i).getId());
+                dtos.get(i).setPrecioVenta(precioVenta.getPrecioVenta());
+
+                // Imagen
+                Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturados.get(i).getId());
+                dtos.get(i).setImagen(imagen.getNombre());
+            }
+
+            return dtos;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public ArticuloManufacturadoDTO findSimpleById(Long id) throws Exception {
+        try {
+            ArticuloManufacturado articuloManufacturado = articuloManufacturadoRepository.findById(id).get();
+            ArticuloManufacturadoDTO dto = articuloManufacturadoMapper.toSimpleDTO(articuloManufacturado);
 
             // ArticuloManufacturadoPrecioVenta
             ArticuloManufacturadoPrecioVenta precioVenta = articuloManufacturadoPrecioVentaRepository.
@@ -159,7 +156,7 @@ public class ArticuloManufacturadoServiceImpl
 
     @Override
     @Transactional
-    public ArticuloManufacturadoFullDTO saveArticuloManufacturado(ArticuloManufacturadoFullDTO dto) throws Exception {
+    public ArticuloManufacturado save(ArticuloManufacturadoFullDTO dto) throws Exception {
         try {
             ArticuloManufacturado articuloManufacturado = articuloManufacturadoMapper.toEntity(dto);
             articuloManufacturado = articuloManufacturadoRepository.save(articuloManufacturado);
@@ -176,7 +173,7 @@ public class ArticuloManufacturadoServiceImpl
             );
             articuloManufacturadoPrecioVentaRepository.save(precioVenta);
 
-            return articuloManufacturadoMapper.toDTO(articuloManufacturado);
+            return articuloManufacturado;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -184,7 +181,7 @@ public class ArticuloManufacturadoServiceImpl
 
     @Override
     @Transactional
-    public ArticuloManufacturadoFullDTO updateArticuloManufacturado(Long id, ArticuloManufacturadoFullDTO dto) throws Exception {
+    public ArticuloManufacturado update(Long id, ArticuloManufacturadoFullDTO dto) throws Exception {
         try {
             Optional<ArticuloManufacturado> optional = articuloManufacturadoRepository.findById(id);
 
@@ -233,7 +230,7 @@ public class ArticuloManufacturadoServiceImpl
                 articuloManufacturadoPrecioVentaRepository.save(precioVenta);
             }
 
-            return articuloManufacturadoMapper.toDTO(articuloManufacturado);
+            return articuloManufacturado;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

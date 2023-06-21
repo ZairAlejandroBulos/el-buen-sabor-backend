@@ -48,7 +48,7 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
 
     @Override
     @Transactional
-    public Rubro saveRubro(RubroDTO dto) throws Exception {
+    public Rubro save(RubroDTO dto) throws Exception {
         try {
             Rubro rubro = rubroMapper.toEntity(dto);
 
@@ -69,7 +69,7 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
 
     @Override
     @Transactional
-    public Rubro updateRubro(Long id, RubroDTO dto) throws Exception {
+    public Rubro update(Long id, RubroDTO dto) throws Exception {
         try {
             Optional<Rubro> optional = rubroRepository.findById(id);
 

@@ -9,7 +9,5 @@ public interface RubroService extends BaseService<Rubro, RubroDTO, Long> {
 
     List<RubroDTO> findDesbloqueados() throws Exception;
     Boolean existsByDenominacion(String denominacion) throws Exception;
-    Rubro saveRubro(RubroDTO dto) throws Exception;
-    Rubro updateRubro(Long id, RubroDTO dto) throws Exception;
     void bloquearDesbloquear(Long id) throws Exception;
 }
