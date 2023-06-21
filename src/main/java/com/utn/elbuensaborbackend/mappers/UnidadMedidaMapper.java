@@ -15,25 +15,4 @@ public interface UnidadMedidaMapper extends BaseMapper<UnidadMedida, UnidadMedid
     static UnidadMedidaMapper getInstance() {
         return Mappers.getMapper(UnidadMedidaMapper.class);
     }
-
-    UnidadMedidaDTO toDTO(UnidadMedida source);
-
-
-    UnidadMedida toEntity(UnidadMedidaDTO source);
-
-    @IterableMapping(qualifiedByName = "toDTO")
-    List<UnidadMedidaDTO> toDTOsList(List<UnidadMedida> source);
-
-    @IterableMapping(qualifiedByName = "toEntity")
-    List<UnidadMedida> toEntitiesList(List<UnidadMedidaDTO> source);
-
-    @Named("toDTO")
-    default UnidadMedidaDTO toDTO(UnidadMedidaDTO source) {
-        return source;
-    }
-
-    @Named("toEntity")
-    default UnidadMedida toEntity(UnidadMedida source) {
-        return source;
-    }
 }

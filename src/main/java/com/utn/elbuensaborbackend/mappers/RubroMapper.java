@@ -24,5 +24,4 @@ public interface RubroMapper extends BaseMapper<Rubro, RubroDTO> {
     @Mapping(target = "rubroPadre", ignore = true)
     @Mapping(target = "subRubros", ignore = true)
     Rubro toEntity(RubroDTO source);
-
 }

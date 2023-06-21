@@ -22,10 +22,4 @@ public interface ArticuloInsumoMapper extends BaseMapper<ArticuloInsumo, Articul
     ArticuloInsumoDTO toSimpleDTO(ArticuloInsumo source);
 
     List<ArticuloInsumoDTO> toSimpleDTOsList(List<ArticuloInsumo> source);
-
-    ArticuloInsumoFullDTO toDTO(ArticuloInsumo source);
-
-    ArticuloInsumo toEntity(ArticuloInsumoFullDTO source);
-    List<ArticuloInsumoFullDTO> toDTOsList(List<ArticuloInsumo> source);
-    List<ArticuloInsumo> toEntitiesList(List<ArticuloInsumoFullDTO> source);
 }
