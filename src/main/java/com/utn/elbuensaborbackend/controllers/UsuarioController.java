@@ -14,26 +14,4 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioDTO> {
 
     @Autowired
     private UsuarioService service;
-
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody UsuarioDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.saveUsuario(dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> save(@PathVariable Long id, @RequestBody UsuarioDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.updateUsuario(id, dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
 }

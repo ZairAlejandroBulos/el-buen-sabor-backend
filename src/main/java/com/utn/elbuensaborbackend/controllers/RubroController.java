@@ -37,28 +37,6 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroDTO> {
         }
     }
 
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody RubroDTO entity) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.saveRubro(entity));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody RubroDTO entity) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.updateRubro(id, entity));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
     @DeleteMapping("/bloquear-desbloquear/{id}")
     public ResponseEntity<?> bloquearDesbloquear(@PathVariable Long id) {
         try {

@@ -15,25 +15,4 @@ public class RolController extends BaseControllerImpl<Rol, RolDTO> {
     @Autowired
     private RolService service;
 
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody RolDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.save(dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody RolDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.update(id, dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
 }

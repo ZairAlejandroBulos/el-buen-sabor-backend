@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/unidad-medida")
+@RequestMapping("api/v1/unidades-medidas")
 public class UnidadMedidaController extends BaseControllerImpl<UnidadMedida, UnidadMedidaDTO> {
 
     @Autowired
@@ -20,28 +20,6 @@ public class UnidadMedidaController extends BaseControllerImpl<UnidadMedida, Uni
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(service.existsByDenominacionUnidadMedida(denominacion));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody UnidadMedidaDTO entity) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.save(entity));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody UnidadMedidaDTO entity) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.update(id, entity));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("{\"error\": \"Ocurrio un error\"}");

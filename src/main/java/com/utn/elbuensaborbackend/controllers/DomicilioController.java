@@ -14,25 +14,4 @@ public class DomicilioController extends BaseControllerImpl<Domicilio, Domicilio
 
     @Autowired
     private DomicilioService service;
-
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody DomicilioDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.saveDomicilio(dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id,@RequestBody DomicilioDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.updateDomicilio(id, dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
 }

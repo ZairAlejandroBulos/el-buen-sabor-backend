@@ -14,26 +14,4 @@ public class LocalidadController extends BaseControllerImpl<Localidad, Localidad
 
     @Autowired
     private LocalidadService service;
-
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody LocalidadDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.save(dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> save(@PathVariable Long id, @RequestBody LocalidadDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.update(id, dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
 }

@@ -15,22 +15,22 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
     @Autowired
     private ArticuloManufacturadoService service;
 
-    @GetMapping("/findAll")
-    public ResponseEntity<?> getAllArticuloManufacturado(){
+    @GetMapping("/simple")
+    public ResponseEntity<?> getAllSimple() {
         try {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findAllArticuloManufacturado());
+                    .body(service.findAllSimple());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
 
-    @GetMapping("/byId/{id}")
-    public ResponseEntity<?> getArticuloManufacturadoById(@PathVariable Long id){
+    @GetMapping("/simple/{id}")
+    public ResponseEntity<?> getSimpleById(@PathVariable Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findArticuloManufacturadoById(id));
+                    .body(service.findSimpleById(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("{\"error\": \"Ocurrio un error\"}");
@@ -44,50 +44,6 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
                     .body(service.findByTermino(termino));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @GetMapping("/findAllFull")
-    public ResponseEntity<?> getAllArticuloManufacturadoFull(){
-        try {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findAllArticuloManufacturadoFull());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @GetMapping("/full/byId/{id}")
-    public ResponseEntity<?> getArticuloManufacturadoFullById(@PathVariable Long id){
-        try {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findArticuloManufacturadoFullById(id));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody ArticuloManufacturadoFullDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.saveArticuloManufacturado(dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ArticuloManufacturadoFullDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.updateArticuloManufacturado(id, dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
     }

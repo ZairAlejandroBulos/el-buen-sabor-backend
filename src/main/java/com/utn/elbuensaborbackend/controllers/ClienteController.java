@@ -60,26 +60,4 @@ public class ClienteController extends BaseControllerImpl<Cliente, ClienteDTO> {
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
-
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody ClienteDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.saveCliente(dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ClienteDTO dto) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.updateCliente(id, dto));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("{\"error\": \"Ocurrio un error\"}");
-        }
-    }
 }
