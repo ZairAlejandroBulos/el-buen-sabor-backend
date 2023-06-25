@@ -37,6 +37,16 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
     }
 
     @Override
+    public List<RubroDTO> findByTipo(Boolean bool) throws Exception {
+        try {
+            List<Rubro> rubros = rubroRepository.findByTipo(bool);
+            return rubroMapper.toDTOsList(rubros);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public Boolean existsByDenominacion(String denominacion) throws Exception {
         try {
             Rubro rubro = rubroRepository.findByDenominacion(denominacion);
@@ -91,6 +101,7 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, RubroDTO, Long> imp
             }
 
             rubro.setDenominacion(dto.getDenominacion());
+            rubro.setEsInsumo(dto.getEsInsumo());
 
             return rubroRepository.save(rubro);
         } catch (Exception e) {

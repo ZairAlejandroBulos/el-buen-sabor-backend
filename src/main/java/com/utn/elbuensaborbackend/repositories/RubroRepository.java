@@ -12,6 +12,9 @@ public interface RubroRepository extends BaseRepository<Rubro, Long> {
     @Query(value = "SELECT * FROM rubro WHERE bloqueado = false", nativeQuery = true)
     List<Rubro> findDesbloqueados();
 
+    @Query(value = "SELECT * FROM rubro WHERE es_insumo = :bool", nativeQuery = true)
+    List<Rubro> findByTipo(@Param("bool") Boolean bool);
+
     @Query(value = "SELECT * FROM rubro WHERE denominacion = :denominacion", nativeQuery = true)
     Rubro findByDenominacion(@Param("denominacion") String denominacion);
 }

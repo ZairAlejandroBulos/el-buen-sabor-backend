@@ -26,6 +26,17 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroDTO> {
         }
     }
 
+    @GetMapping("/byTipo/{bool}")
+    public ResponseEntity<?> getByTipo(@PathVariable Boolean bool) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(service.findByTipo(bool));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("{\"error\": \"Ocurrio un error\"}");
+        }
+    }
+
     @GetMapping("/exists/{denominacion}")
     public ResponseEntity<?> existsByDenominacion(@PathVariable String denominacion) {
         try {

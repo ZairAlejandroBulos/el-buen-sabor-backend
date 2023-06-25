@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "rubro")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_rubro"))
-public class Rubro extends Base  {
+public class Rubro extends Base {
 
     @Column(name = "denominacion", nullable = false, length = 20)
     private String denominacion;
@@ -22,6 +22,10 @@ public class Rubro extends Base  {
     @Column(name = "bloqueado")
     @Convert(converter = org.hibernate.type.NumericBooleanConverter.class)
     private Boolean bloqueado;
+
+    @Column(name = "es_insumo")
+    @Convert(converter = org.hibernate.type.NumericBooleanConverter.class)
+    private Boolean esInsumo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rubro_padre_id")

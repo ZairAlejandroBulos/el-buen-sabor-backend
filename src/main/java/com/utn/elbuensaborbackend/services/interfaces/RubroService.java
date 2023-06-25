@@ -8,6 +8,7 @@ import java.util.List;
 public interface RubroService extends BaseService<Rubro, RubroDTO, Long> {
 
     List<RubroDTO> findDesbloqueados() throws Exception;
+    List<RubroDTO> findByTipo(Boolean bool) throws Exception;
     Boolean existsByDenominacion(String denominacion) throws Exception;
     void bloquearDesbloquear(Long id) throws Exception;
 }

@@ -9,6 +9,8 @@ public class RubroDTO extends BaseDTO {
 
     private Boolean bloqueado;
 
+    private Boolean esInsumo;
+
     private Long rubroPadreId;
 
     private String rubroPadreDenominacion;
