@@ -9,4 +9,5 @@ public interface ImagenService extends BaseService<Imagen, ImagenDTO, Long> {
 
     Resource findImagenByName(String nombre) throws Exception;
     void saveImagen(MultipartFile file, String nombre) throws Exception;
+    void deleteImagen(String nombre) throws Exception;
 }

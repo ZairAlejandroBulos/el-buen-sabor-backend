@@ -59,8 +59,17 @@ public class ImagenServiceImpl extends BaseServiceImpl<Imagen, ImagenDTO, Long> 
            File dest = new File(filePath);
            file.transferTo(dest);
        } catch (Exception e) {
-           System.out.println(e.getMessage());
            throw new Exception(e.getMessage());
        }
+    }
+
+    @Override
+    public void deleteImagen(String nombre) throws Exception {
+        try {
+            File imagen = findImagenByName(nombre).getFile();
+            imagen.delete();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }
