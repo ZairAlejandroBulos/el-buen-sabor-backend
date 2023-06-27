@@ -14,4 +14,8 @@ public class Receta extends Base {
 
     @Column(name = "descripcion", columnDefinition = "TEXT")
 	private String descripcion;
+
+    @OneToOne
+    @JoinColumn(name = "articulo_manufacturado_id")
+    private ArticuloManufacturado articuloManufacturado;
 }

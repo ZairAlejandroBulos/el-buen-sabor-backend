@@ -13,6 +13,8 @@ public class ArticuloManufacturadoFullDTO extends BaseDTO {
 
     private String imagen;
 
+    private String receta;
+
     private Double precioVenta;
 
     private Time tiempoEstimadoCocina;

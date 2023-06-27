@@ -5,11 +5,13 @@ import com.utn.elbuensaborbackend.dtos.ArticuloManufacturadoFullDTO;
 import com.utn.elbuensaborbackend.entities.ArticuloManufacturado;
 import com.utn.elbuensaborbackend.entities.ArticuloManufacturadoPrecioVenta;
 import com.utn.elbuensaborbackend.entities.Imagen;
+import com.utn.elbuensaborbackend.entities.Receta;
 import com.utn.elbuensaborbackend.mappers.ArticuloManufacturadoMapper;
 import com.utn.elbuensaborbackend.mappers.BaseMapper;
 import com.utn.elbuensaborbackend.mappers.RubroMapper;
 import com.utn.elbuensaborbackend.repositories.*;
 import com.utn.elbuensaborbackend.services.interfaces.ArticuloManufacturadoService;
+import com.utn.elbuensaborbackend.services.interfaces.ImagenService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,12 @@ public class ArticuloManufacturadoServiceImpl
     @Autowired
     private ArticuloManufacturadoPrecioVentaRepository articuloManufacturadoPrecioVentaRepository;
 
+    @Autowired
+    private RecetaRepository recetaRepository;
+    
+    @Autowired
+    private ImagenService imagenService;
+    
     private final ArticuloManufacturadoMapper articuloManufacturadoMapper = ArticuloManufacturadoMapper.getInstance();
 
     private final RubroMapper rubroMapper = RubroMapper.getInstance();
@@ -58,6 +66,10 @@ public class ArticuloManufacturadoServiceImpl
                 // Imagen
                 Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturados.get(i).getId());
                 dtos.get(i).setImagen(imagen.getNombre());
+
+                // Receta
+                Receta receta = recetaRepository.findByArticuloManufacturadoId(articuloManufacturados.get(i).getId());
+                dtos.get(i).setReceta(receta.getDescripcion());
             }
 
             return dtos;
@@ -74,12 +86,16 @@ public class ArticuloManufacturadoServiceImpl
 
             // ArticuloManufacturadoPrecioVenta
             ArticuloManufacturadoPrecioVenta precioVenta = articuloManufacturadoPrecioVentaRepository.
-                    findByArticuloManufacturadoId(articuloManufacturado.getId());
+                    findByArticuloManufacturadoId(id);
             dto.setPrecioVenta(precioVenta.getPrecioVenta());
 
             // Imagen
-            Imagen imagen = imagenRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
+            Imagen imagen = imagenRepository.findByArticuloManufacturadoId(id);
             dto.setImagen(imagen.getNombre());
+
+            // Receta
+            Receta receta = recetaRepository.findByArticuloManufacturadoId(id);
+            dto.setReceta(receta.getDescripcion());
 
             return dto;
         } catch (Exception e) {
@@ -173,6 +189,10 @@ public class ArticuloManufacturadoServiceImpl
             );
             articuloManufacturadoPrecioVentaRepository.save(precioVenta);
 
+            // Receta
+            Receta receta = new Receta(dto.getReceta(), articuloManufacturado);
+            recetaRepository.save(receta);
+
             return articuloManufacturado;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -200,8 +220,9 @@ public class ArticuloManufacturadoServiceImpl
             Imagen imagenDB = imagenRepository.findByArticuloManufacturadoId(articuloManufacturado.getId());
             if (imagenDB != null) {
                 if (!Objects.equals(dto.getImagen(), imagenDB.getNombre())) {
+                    imagenService.deleteImagen(imagenDB.getNombre());
+
                     imagenDB.setNombre(dto.getImagen());
-                    imagenDB.setArticuloManufacturado(articuloManufacturado);
                     imagenRepository.save(imagenDB);
                 }
             } else {
@@ -229,6 +250,11 @@ public class ArticuloManufacturadoServiceImpl
                 );
                 articuloManufacturadoPrecioVentaRepository.save(precioVenta);
             }
+
+            // Receta
+            Receta receta = recetaRepository.findByArticuloManufacturadoId(id);
+            receta.setDescripcion(dto.getReceta());
+            recetaRepository.save(receta);
 
             return articuloManufacturado;
         } catch (Exception e) {
