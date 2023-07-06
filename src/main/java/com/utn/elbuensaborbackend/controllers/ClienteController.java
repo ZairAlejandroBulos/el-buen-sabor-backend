@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -17,46 +19,47 @@ public class ClienteController extends BaseControllerImpl<Cliente, ClienteDTO> {
     @Autowired
     private ClienteService service;
 
-    @GetMapping("/byRoles/{roles}")
-    public ResponseEntity<?> getAllClientesByRoles(@PathVariable List<String> roles) {
+    @GetMapping("/rolEmpleados")
+    public ResponseEntity<?> getAllEmpleados() {
         try {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findAllClientesByRoles(roles));
+                    .body(service.findAllEmpleados());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
 
-    @GetMapping("/byNombre/{nombre}")
-    public ResponseEntity<?> getAllClientesByName(@PathVariable String nombre) {
+    @GetMapping("/rolClientes")
+    public ResponseEntity<?> getAllClientes() {
         try {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findAllClientesByName(nombre));
+                    .body(service.findAllClientes());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
 
-    @GetMapping("/byApellido/{apellido}")
-    public ResponseEntity<?> getAllClientesByApellido(@PathVariable String apellido) {
+    @GetMapping("/byAuth0Id")
+    public ResponseEntity<?> getClienteByUsuarioAuth0Id(@RequestParam String auth0Id) {
         try {
+            auth0Id = URLDecoder.decode(auth0Id, StandardCharsets.UTF_8);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findAllClientesByApellido(apellido));
+                    .body(service.findClienteByUsuarioAuth0Id(auth0Id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
 
-    @GetMapping("/byNombreAndApellido/{nombre}/{apellido}")
-    public ResponseEntity<?> getAllClientesByNombreAndApellido(@PathVariable String nombre, @PathVariable String apellido) {
+    @PutMapping("/cambiarEstado/{id}")
+    public ResponseEntity<?> updateEstadoCliente(@PathVariable Long id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(service.findAllClientesByNameAndApellido(nombre, apellido));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(service.updateEstado(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("{\"error\": \"Ocurrio un error\"}");
         }
     }
