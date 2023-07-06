@@ -10,12 +10,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "articulo_insumo_precio_compra")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_articulo_insumo_precio_compra"))
-public class ArticuloInsumoPrecioCompra extends Base{
+public class ArticuloInsumoPrecioCompra extends Base {
 
     @Column(name = "fecha")
     private Date fecha;

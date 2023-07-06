@@ -10,12 +10,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "articulo_insumo_stock_actual")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "id_articulo_insumo_stock_actual"))
-public class ArticuloInsumoStockActual extends Base{
+public class ArticuloInsumoStockActual extends Base {
 
     @Column(name = "stock_actual")
     private Float stockActual;

@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 public interface ArticuloInsumoStockMinimoRepository extends BaseRepository<ArticuloInsumoStockMinimo, Long> {
 
     @Query(value = "SELECT * FROM articulo_insumo_stock_minimo " +
-            "WHERE articulo_insumo_id = :articuloInsumoId ORDER BY fecha DESC LIMIT 1", nativeQuery = true)
+            "WHERE articulo_insumo_id = :articuloInsumoId " +
+            "ORDER BY fecha DESC LIMIT 1", nativeQuery = true)
     ArticuloInsumoStockMinimo findByInsumoId(@Param("articuloInsumoId") Long articuloInsumoId);
+
+    @Query(value = "SELECT stock_minimo FROM articulo_insumo_stock_minimo " +
+            "WHERE articulo_insumo_id = :articuloInsumoId " +
+            "ORDER BY fecha DESC LIMIT 1", nativeQuery = true)
+    Float findLastByInsumoId(@Param("articuloInsumoId") Long articuloInsumoId);
 }

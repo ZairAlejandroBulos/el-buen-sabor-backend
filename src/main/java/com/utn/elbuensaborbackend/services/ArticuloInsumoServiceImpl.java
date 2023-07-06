@@ -28,13 +28,13 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
     private ArticuloInsumoRepository articuloInsumoRepository;
 
     @Autowired
-    private ArticuloInsumoPrecioCompraRepository articuloInsumoPrecioCompraRepository;
+    private ArticuloInsumoPrecioCompraRepository precioCompraRepository;
 
     @Autowired
-    private ArticuloInsumoStockMinimoRepository articuloInsumoStockMinimoRepository;
+    private ArticuloInsumoStockMinimoRepository stockMinimoRepository;
 
     @Autowired
-    private ArticuloInsumoStockActualRepository articuloInsumoStockActualRepository;
+    private ArticuloInsumoStockActualRepository stockActualRepository;
 
     private final RubroMapper rubroMapper = RubroMapper.getInstance();
 
@@ -51,24 +51,21 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
     @Override
     public List<ArticuloInsumoFullDTO> findAll() throws Exception {
         try {
-            List<ArticuloInsumo> articuloInsumos = articuloInsumoRepository.findAll();
-            List<ArticuloInsumoFullDTO> dtos = articuloInsumoMapper.toDTOsList(articuloInsumos);
+            List<ArticuloInsumo> articulosInsumos = articuloInsumoRepository.findAll();
+            List<ArticuloInsumoFullDTO> dtos = articuloInsumoMapper.toDTOsList(articulosInsumos);
 
-            for (int i = 0; i < articuloInsumos.size(); i++) {
-                // ArticuloInsumoPrecioCompra
-                ArticuloInsumoPrecioCompra precioCompra = articuloInsumoPrecioCompraRepository.
-                        findByInsumoId(articuloInsumos.get(i).getId());
-                dtos.get(i).setPrecioCompra(precioCompra.getMonto());
+            for (ArticuloInsumo articuloInsumo : articulosInsumos) {
+                // Precio Compra
+                Double precioCompra = precioCompraRepository.findLastByInsumoId(articuloInsumo.getId());
+                dtos.get(articulosInsumos.indexOf(articuloInsumo)).setPrecioCompra(precioCompra);
 
-                // ArticuloInsumoStockMinimo
-                ArticuloInsumoStockMinimo stockMinimo = articuloInsumoStockMinimoRepository.
-                        findByInsumoId(articuloInsumos.get(i).getId());
-                dtos.get(i).setStockMinimo(stockMinimo.getStockMinimo());
+                // Stock Minimo
+                Float stockMinimo = stockMinimoRepository.findLastByInsumoId(articuloInsumo.getId());
+                dtos.get(articulosInsumos.indexOf(articuloInsumo)).setStockMinimo(stockMinimo);
 
-                // ArticuloInsumoStockActual
-                ArticuloInsumoStockActual stockActual = articuloInsumoStockActualRepository.
-                        findByInsumoId(articuloInsumos.get(i).getId());
-                dtos.get(i).setStockActual(stockActual.getStockActual());
+                // Stock Actual
+                Float stockActual = stockActualRepository.findLastByInsumoId(articuloInsumo.getId());
+                dtos.get(articulosInsumos.indexOf(articuloInsumo)).setStockActual(stockActual);
             }
 
             return dtos;
@@ -78,25 +75,22 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
     }
 
     @Override
-    public ArticuloInsumoFullDTO findById(Long id) throws Exception{
+    public ArticuloInsumoFullDTO findById(Long id) throws Exception {
         try {
             ArticuloInsumo articuloInsumo = articuloInsumoRepository.findById(id).get();
             ArticuloInsumoFullDTO dto = articuloInsumoMapper.toDTO(articuloInsumo);
 
-            // ArticuloInsumoPrecioCompra
-            ArticuloInsumoPrecioCompra precioCompra = articuloInsumoPrecioCompraRepository.
-                    findByInsumoId(articuloInsumo.getId());
-            dto.setPrecioCompra(precioCompra.getMonto());
+            // Precio Compra
+            Double precioCompra = precioCompraRepository.findLastByInsumoId(id);
+            dto.setPrecioCompra(precioCompra);
 
-            // ArticuloInsumoStockMinimo
-            ArticuloInsumoStockMinimo stockMinimo = articuloInsumoStockMinimoRepository.
-                    findByInsumoId(articuloInsumo.getId());
-            dto.setStockMinimo(stockMinimo.getStockMinimo());
+            // Stock Minimo
+            Float stockMinimo = stockMinimoRepository.findLastByInsumoId(id);
+            dto.setStockMinimo(stockMinimo);
 
-            // ArticuloInsumoStockActual
-            ArticuloInsumoStockActual stockActual = articuloInsumoStockActualRepository.
-                    findByInsumoId(articuloInsumo.getId());
-            dto.setStockActual(stockActual.getStockActual());
+            // Stock Actual
+            Float stockActual = stockActualRepository.findLastByInsumoId(id);
+            dto.setStockActual(stockActual);
 
             return dto;
         } catch (Exception e) {
@@ -117,7 +111,7 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
                     dto.getPrecioCompra(),
                     articuloInsumo
             );
-            articuloInsumoPrecioCompraRepository.save(precioCompra);
+            precioCompraRepository.save(precioCompra);
 
             // ArticuloInsumoStockMinimo
             ArticuloInsumoStockMinimo stockMinimo = new ArticuloInsumoStockMinimo(
@@ -125,7 +119,7 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
                     new Date(),
                     articuloInsumo
             );
-            articuloInsumoStockMinimoRepository.save(stockMinimo);
+            stockMinimoRepository.save(stockMinimo);
 
             // ArticuloInsumoStockActual
             ArticuloInsumoStockActual stockActual = new ArticuloInsumoStockActual(
@@ -133,7 +127,7 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
                     new Date(),
                     articuloInsumo
             );
-            articuloInsumoStockActualRepository.save(stockActual);
+            stockActualRepository.save(stockActual);
 
             return articuloInsumo;
         } catch (Exception e) {
@@ -158,47 +152,46 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
             articuloInsumo.setUnidadMedida(unidadMedidaMapper.toEntity(dto.getUnidadMedida()));
             articuloInsumo = articuloInsumoRepository.save(articuloInsumo);
 
-            // ArticuloInsumoPrecioCompra
-            ArticuloInsumoPrecioCompra precioCompraDB = articuloInsumoPrecioCompraRepository.findByInsumoId(articuloInsumo.getId());
+            // Precio Compra
+            Double precioCompraDB = precioCompraRepository.findLastByInsumoId(articuloInsumo.getId());
             if (precioCompraDB != null ) {
-                if (!Objects.equals(dto.getPrecioCompra(), precioCompraDB.getMonto())) {
-                    articuloInsumoPrecioCompraRepository.save(new ArticuloInsumoPrecioCompra(
+                if (!Objects.equals(dto.getPrecioCompra(), precioCompraDB)) {
+                    precioCompraRepository.save(new ArticuloInsumoPrecioCompra(
                             new Date(),
                             dto.getPrecioCompra(),
                             articuloInsumo)
                     );
                 }
             } else {
-                articuloInsumoPrecioCompraRepository.save(new ArticuloInsumoPrecioCompra(
+                precioCompraRepository.save(new ArticuloInsumoPrecioCompra(
                         new Date(),
                         dto.getPrecioCompra(),
                         articuloInsumo)
                 );
             }
 
-            // ArticuloInsumoStockMinimo
-            ArticuloInsumoStockMinimo stockMinimoDB = articuloInsumoStockMinimoRepository.findByInsumoId(articuloInsumo.getId());
+            // Stock Minimo
+            Float stockMinimoDB = stockMinimoRepository.findLastByInsumoId(articuloInsumo.getId());
             if (stockMinimoDB != null) {
-                if (!Objects.equals(dto.getStockMinimo(), stockMinimoDB.getStockMinimo())) {
-                    articuloInsumoStockMinimoRepository.save(new ArticuloInsumoStockMinimo(
+                if (!Objects.equals(dto.getStockMinimo(), stockMinimoDB)) {
+                    stockMinimoRepository.save(new ArticuloInsumoStockMinimo(
                             dto.getStockMinimo(),
                             new Date(),
                             articuloInsumo)
                     );
                 }
             } else {
-                articuloInsumoStockMinimoRepository.save(new ArticuloInsumoStockMinimo(
+                stockMinimoRepository.save(new ArticuloInsumoStockMinimo(
                         dto.getStockMinimo(),
                         new Date(),
                         articuloInsumo)
                 );
             }
 
-            // ArticuloInsumoStockActual
-            ArticuloInsumoStockActual stockActualDB =
-                    articuloInsumoStockActualRepository.findByInsumoId(articuloInsumo.getId());
+            // Stock Actual
+            ArticuloInsumoStockActual stockActualDB = stockActualRepository.findByInsumoId(articuloInsumo.getId());
             if (stockActualDB == null) {
-                articuloInsumoStockActualRepository.save(new ArticuloInsumoStockActual(
+                stockActualRepository.save(new ArticuloInsumoStockActual(
                         dto.getStockActual(),
                         new Date(),
                         articuloInsumo
@@ -207,7 +200,7 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo, A
                 stockActualDB.setStockActual(dto.getStockActual());
                 stockActualDB.setFecha(new Date());
                 stockActualDB.setArticuloInsumo(articuloInsumo);
-                articuloInsumoStockActualRepository.save(stockActualDB);
+                stockActualRepository.save(stockActualDB);
             }
 
             return articuloInsumo;

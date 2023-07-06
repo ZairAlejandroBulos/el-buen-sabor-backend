@@ -30,6 +30,5 @@ public class ArticuloInsumo extends Base {
 
     @ManyToOne
     @JoinColumn(name = "rubro_id")
-    @JsonIgnore
     private Rubro rubro;
 }
