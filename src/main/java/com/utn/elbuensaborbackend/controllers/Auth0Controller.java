@@ -6,6 +6,7 @@ import com.nimbusds.jose.shaded.gson.JsonArray;
 import com.nimbusds.jose.shaded.gson.JsonObject;
 import com.squareup.okhttp.*;
 import com.squareup.okhttp.RequestBody;
+import com.utn.elbuensaborbackend.dtos.Auth0RolDTO;
 import com.utn.elbuensaborbackend.dtos.Auth0UsuarioDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
