@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 
 import java.util.List;
 
@@ -16,19 +15,39 @@ import java.util.List;
 @AttributeOverride(name = "id", column = @Column(name = "id_articulo_insumo"))
 public class ArticuloInsumo extends Base {
 
-    @Column(name = "denominacion",length = 20, nullable = false)
+    @Column(name = "denominacion",length = 20)
     private String denominacion;
 
-    @Basic
-    @Column(name = "es_insumo", nullable = false)
+    @Column(name = "es_insumo")
     @Convert(converter = org.hibernate.type.NumericBooleanConverter.class)
     private Boolean esInsumo;
+
+    @Column(name = "stock_actual")
+    private Float stockActual;
+
+    @Column(name = "stock_minimo")
+    private Float stockMinimo;
+
+    @ManyToOne
+    @JoinColumn(name = "rubro_id")
+    private Rubro rubro;
 
     @ManyToOne
     @JoinColumn(name = "unidad_medida_id")
     private UnidadMedida unidadMedida;
 
-    @ManyToOne
-    @JoinColumn(name = "rubro_id")
-    private Rubro rubro;
+    @OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL)
+    private List<ArticuloInsumoPrecioCompra> preciosCompras;
+
+    @OneToMany(mappedBy = "articuloInsumo")
+    @JsonIgnore
+    List<DetalleArticuloManufacturado> detalles;
+
+    public void addStock(Float stock) {
+        this.stockActual += stock;
+    }
+
+    public void decrementStock(Float stock) {
+        this.stockActual -= stock;
+    }
 }

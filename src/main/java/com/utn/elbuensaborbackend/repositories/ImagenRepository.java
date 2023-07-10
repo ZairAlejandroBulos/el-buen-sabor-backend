@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ImagenRepository extends BaseRepository<Imagen, Long>{
 
-    @Query(value = "SELECT * FROM imagen " +
-            "WHERE articulo_manufacturado_id = :articuloManufacturadoId LIMIT 1", nativeQuery = true)
-    Imagen findByArticuloManufacturadoId(@Param("articuloManufacturadoId") Long articuloManufacturadoId);
+    @Query(value = "SELECT * FROM imagen WHERE articulo_manufacturado_id = :articuloManufacturadoId LIMIT 1", nativeQuery = true)
+    Imagen findByManufacturadoId(@Param("articuloManufacturadoId") Long articuloManufacturadoId);
+
+    @Query(value = "SELECT nombre FROM imagen WHERE articulo_manufacturado_id = :articuloManufacturadoId LIMIT 1", nativeQuery = true)
+    String findLastByManufacturadoId(@Param("articuloManufacturadoId") Long articuloManufacturadoId);
 }

@@ -11,6 +11,10 @@ public interface ArticuloManufacturadoPrecioVentaRepository extends BaseReposito
     @Query(value = "SELECT * FROM articulo_manufacturado_precio_venta " +
             "WHERE articulo_manufacturado_id = :articuloManufacturadoId " +
             "ORDER BY fecha DESC, id_precio_venta DESC LIMIT 1", nativeQuery = true)
-    ArticuloManufacturadoPrecioVenta findByArticuloManufacturadoId(@Param("articuloManufacturadoId") Long articuloManufacturadoId);
+    ArticuloManufacturadoPrecioVenta findByManufacturadoId(@Param("articuloManufacturadoId") Long articuloManufacturadoId);
 
+    @Query(value = "SELECT monto FROM articulo_manufacturado_precio_venta " +
+            "WHERE articulo_manufacturado_id = :articuloManufacturadoId " +
+            "ORDER BY fecha DESC, id_precio_venta DESC LIMIT 1", nativeQuery = true)
+    Double findLastByManufacturado(@Param("articuloManufacturadoId") Long articuloManufacturadoId);
 }

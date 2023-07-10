@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ArticuloManufacturadoRepository extends BaseRepository<ArticuloManufacturado, Long> {
+
     @Query(value = "SELECT am.* FROM articulo_manufacturado am " +
             "JOIN rubro r " +
             "ON am.rubro_id = r.id_rubro " +

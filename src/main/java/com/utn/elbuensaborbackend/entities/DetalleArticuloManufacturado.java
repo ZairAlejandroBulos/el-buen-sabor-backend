@@ -7,20 +7,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "articulo_manufacturado_precio_venta")
-@AttributeOverride(name = "id", column = @Column(name = "id_precio_venta"))
+@Table(name = "detalle_articulo_manufacturado")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ArticuloManufacturadoPrecioVenta extends Base {
+@AttributeOverride(name = "id", column = @Column(name = "id_detalle_articulo_manufacturado"))
+public class DetalleArticuloManufacturado extends Base {
 
-    @Column(name = "fecha")
-    @Temporal(value = TemporalType.DATE)
-    private Date fecha;
+    @Column(name = "cantidad")
+    private Double cantidad;
 
-    @Column(name = "monto")
-    private Double monto;
+    @ManyToOne
+    @JoinColumn(name = "articulo_insumo_id")
+    private ArticuloInsumo articuloInsumo;
 
     @ManyToOne
     @JsonIgnore

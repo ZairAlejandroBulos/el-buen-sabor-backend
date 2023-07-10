@@ -1,5 +1,6 @@
 package com.utn.elbuensaborbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,5 +18,6 @@ public class Receta extends Base {
 
     @OneToOne
     @JoinColumn(name = "articulo_manufacturado_id")
+    @JsonIgnore
     private ArticuloManufacturado articuloManufacturado;
 }

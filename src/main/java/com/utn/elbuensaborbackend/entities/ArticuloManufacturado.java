@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Table(name = "articulo_manufacturado")
@@ -14,7 +15,7 @@ import java.sql.Time;
 @AttributeOverride(name = "id", column = @Column(name = "id_articulo_manufacturado"))
 public class ArticuloManufacturado extends Base {
 
-    @Column(name = "denominacion", length = 20)
+    @Column(name = "denominacion")
 	private String denominacion;
 
     @Column(name = "descripcion")
@@ -27,4 +28,16 @@ public class ArticuloManufacturado extends Base {
     @ManyToOne
     @JoinColumn(name = "rubro_id")
 	private Rubro rubro;
+
+    @OneToOne(mappedBy = "articuloManufacturado", cascade = CascadeType.ALL)
+    private Imagen imagen;
+
+    @OneToOne(mappedBy = "articuloManufacturado", cascade = CascadeType.ALL)
+    private Receta receta;
+
+    @OneToMany(mappedBy = "articuloManufacturado", cascade = CascadeType.ALL)
+    private List<ArticuloManufacturadoPrecioVenta> preciosVentas;
+
+    @OneToMany(mappedBy = "articuloManufacturado", cascade = CascadeType.ALL)
+    private List<DetalleArticuloManufacturado> detalles;
 }
